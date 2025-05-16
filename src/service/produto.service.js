@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/produtos';
+const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
 
 export const getProdutos = async () => {
   try {
