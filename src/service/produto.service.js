@@ -10,4 +10,16 @@ export const getProdutos = async () => {
     console.error('Erro ao buscar produtos', error);
     return []; // 👈 evita erro no .map() se algo der errado
   }
+  
+};
+
+export const deleteProduto = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    console.log('Produto deletado:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao deletar produto', error);
+    throw error;
+  }
 };
