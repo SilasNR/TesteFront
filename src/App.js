@@ -1,12 +1,11 @@
-import React from 'react';
-import ProdutoList from './components/ProdutoList';
-import NavBar from './components/NavBar/NavBar';
+//import React from 'react';
+//import ProdutoList from './Pages/Produtos/ProdutoList';
+import Login from './Pages/Login/Login'
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <ProdutoList />
+      <Login></Login>
     </div>
   );
 }
