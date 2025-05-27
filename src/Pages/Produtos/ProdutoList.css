@@ -2,3 +2,27 @@
     background-color: rgb(160, 190, 216);
     padding: 10px 50px;
 }
+
+.linha{
+    border: 1px black solid;
+}
+.linha:hover{
+    background-color: rgb(197, 231, 245);
+}
+
+
+.titulos{
+    background-color: rgb(0, 81, 148);
+    color: white;
+    font-size: 20px;
+}
+
+.celula{
+    border: 1px black solid;
+}
+
+.menu{
+    border: 1px solid black;
+    
+}
+

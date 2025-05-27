@@ -1,9 +1,7 @@
 //import React, { useEffect, useState } from 'react';
 import './Login.css'
 //import {   } from '../service/produto.service';
-import { Row, Col } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Row, Col, Button,Form} from 'react-bootstrap';
 //import CNBR from './img/CNBR.jpg'
 
 function Login() {
@@ -11,7 +9,7 @@ function Login() {
 
     return (
         <>
-            <div className="d-flex justify-content-center  vh-100">
+            <div className="d-flex justify-content-center vh-100">
                 <Row>
                     <Col>
                         <div id='imagem' className='mt-5 w-100  mb-3'>
