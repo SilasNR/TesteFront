@@ -1,11 +1,11 @@
-import React from 'react';
-import ProdutoList from './components/ProdutoList';
+//import React from 'react';
+//import ProdutoList from './Pages/Produtos/ProdutoList';
+import Login from './Pages/Login/Login'
 
 function App() {
   return (
     <div className="App">
-      <h1>Bem-vindo ao Sistema de Produtos</h1>
-      <ProdutoList />
+      <Login></Login>
     </div>
   );
 }

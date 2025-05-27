@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ProdutoList.css';
-import { getProdutos, deleteProduto } from '../service/produto.service';
+import { getProdutos, deleteProduto } from '../../service/produto.service';
 
 function ProdutoList() {
   const [produtos, setProdutos] = useState([]);
@@ -107,6 +107,13 @@ function ProdutoList() {
           type="button"
           id="btnEnviarProduto"
           value="Cadastrar Produto"
+          onClick={enviarProduto}
+        />
+
+        <input
+          type="button"
+          id="btnEnviarProduto"
+          value="Deletar Produto"
           onClick={enviarProduto}
         />
       </div>
