@@ -1,27 +1,65 @@
 import axios from 'axios';
 
-const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
+//http://localhost:3001/produtos
+//const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
+const URL2 = "https://backend-basico-production-b95f.up.railway.app/produtos";
 
 export const getProdutos = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(URL2);
     return response.data;
   } catch (error) {
     console.error('Erro ao buscar produtos', error);
     return []; // 👈 evita erro no .map() se algo der errado
   }
-  
+
+};
+
+export const createProduto = async (produto) => {
+  try {
+    const response = await fetch(
+      `${URL2}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(produto),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro: ${response.status}`);
+    }
+
+    const resultado = await response.json();
+    console.log('Produto cadastrado:', resultado);
+    return resultado;
+  } catch (err) {
+    console.error('Erro ao enviar produto: ', err);
+    throw err;
+  }
 };
 
 
+// export const deleteProdutos = async (ids) => {
+//   try {
+//     const response = await axios.delete(`${API_URL}`, {
+//       data: ids, // <-- Importante! DELETE não usa 'body' diretamente no axios, usa 'data'
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error('Erro ao deletar produtos', error);
+//     throw error;
+//   }
+// };
 
-export const deleteProduto = async (id) => {
+export const deleteProdutos = async (ids) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`);
-    console.log('Produto deletado:', response.data);
+    const response = await axios.post(`${URL2}/delete-many`, ids);
     return response.data;
   } catch (error) {
-    console.error('Erro ao deletar produto', error);
+    console.error('Erro ao deletar produtos', error);
     throw error;
   }
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ProdutoList.css';
-import { getProdutos, deleteProduto } from '../../service/produto.service';
+import { getProdutos, deleteProdutos, createProduto} from '../../service/produto.service';
 import { Row, Col, Container, Form, Spinner } from 'react-bootstrap';
 
 
@@ -14,11 +14,11 @@ function ProdutoList() {
     if (Array.isArray(data)) {
       setProdutos(data);
       console.log("buscando ...");
-      
+
     } else {
       setProdutos([]);
       console.log("não encontrado ...");
-      
+
     }
   };
 
@@ -26,50 +26,53 @@ function ProdutoList() {
     busacarProdutos();
   }, []);
 
-  const deletarProduto = async (id) => {
+  const enviarProduto = async () => {
+  if (codigoProduto.trim() !== '') {
+    const jsonProduto = {
+      codigo: codigoProduto.trim(),
+      quantidade: parseInt(quantidade),
+    };
+
     try {
-      await deleteProduto(id);
+      await createProduto(jsonProduto);
+      setCodigoProduto('');
+      setQuantidade('');
       busacarProdutos();
-    } catch (error) {
-      console.error('Erro ao deletar produto:', error);
+    } catch (err) {
+      console.error('Erro ao cadastrar produto:', err);
+    }
+  } else {
+    console.warn('Código do produto está vazio');
+  }
+};
+
+  const [selected, setSelected] = useState([]);
+
+  const mudarCheckbox = (e) => {
+    const value = Number(e.target.value);
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setSelected([...selected, value]);
+    } else {
+      setSelected(selected.filter((v) => v !== value));
     }
   };
 
-  const enviarProduto = async () => {
-    if (codigoProduto.trim() !== '') {
-      try {
-        const jsonProduto = {
-          codigo: codigoProduto.trim(),
-          quantidade: parseInt(quantidade),
-        };
+  const deletarSelecionados = async () => {
+    console.log(selected);
+    
+    if (!window.confirm('Tem certeza que deseja deletar os produtos selecionados?')) {
+      return;
+    }
 
-        const response = await fetch(
-          'https://backend-basico-production-b95f.up.railway.app/produtos',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(jsonProduto),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`Erro: ${response.status}`);
-        }
-
-        const resultado = await response.json();
-        console.log('Produto cadastrado:', resultado);
-
-        setCodigoProduto('');
-        setQuantidade('');
-
-        busacarProdutos();
-      } catch (err) {
-        console.error('Erro ao enviar produto: ', err);
-      }
-    } else {
-      console.warn('Código do produto está vazio');
+    try {
+      await deleteProdutos(selected);
+      busacarProdutos();
+      setSelected([]);
+      console.log('Produtos deletados com sucesso!');
+    } catch (error) {
+      console.error('Erro ao deletar produtos:', error);
     }
   };
 
@@ -78,25 +81,25 @@ function ProdutoList() {
       <Container fluid className='vh-100'>
         <Row className='px-0'>
           <Col sm={3} className='menu vh-100'>
-            <h1>Menu</h1>
+            <h1>Pedidos</h1>
           </Col>
           {produtos.length > 0 ? (
             <Col className=' vh-100'>
               <Row>
-                <h1>nav</h1>
+                <h1>nav {selected}</h1>
               </Row>
               <Row>
                 <Container fluid>
                   <Row className='titulos px-0'>
-                    <Col lg={2}></Col>
+                    <Col lg={2}><i id="lixo" class="bi bi-trash3" onClick={deletarSelecionados}></i></Col>
                     <Col>Código</Col>
                     <Col>Quantidade</Col>
                   </Row>
                   {produtos.map((produto) => (
                     <>
-                      <Row className='linha px-0'>
+                      <Row key={produto.id} className='linha px-0'>
                         <Col lg={2}>
-                          <Form.Check type="checkbox" />
+                          <Form.Check type="checkbox" value={produto.id} onChange={mudarCheckbox} />
                         </Col>
                         <Col className='celula'>
                           <p>{produto.codigo}</p>
@@ -124,7 +127,7 @@ function ProdutoList() {
         </Row>
       </Container >
 
-      {/* <div className="Form">
+      <div className="Form">
         <label>Código:</label>
         <input
           type="text"
@@ -156,7 +159,7 @@ function ProdutoList() {
           value="Deletar Produto"
           onClick={enviarProduto}
         />
-      </div> */}
+      </div>
     </>
   );
 }

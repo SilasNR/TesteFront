@@ -26,3 +26,9 @@
     
 }
 
+#lixo{
+    cursor: pointer;   
+}
+#lixo:hover{
+    color: red;
+}
