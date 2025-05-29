@@ -11,8 +11,12 @@ function ProdutoList() {
     const data = await getProdutos();
     if (Array.isArray(data)) {
       setProdutos(data);
+      console.log("buscando ...");
+      
     } else {
       setProdutos([]);
+      console.log("não encontrado ...");
+      
     }
   };
 
