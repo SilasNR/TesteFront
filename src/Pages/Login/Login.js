@@ -1,21 +1,18 @@
 //import React, { useEffect, useState } from 'react';
 import './Login.css'
 //import {   } from '../service/produto.service';
-import { Row, Col } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Img from './CNBR.jpg'
+import { Row, Col, Button,Form} from 'react-bootstrap';
+//import CNBR from './img/CNBR.jpg'
 
 function Login() {
 
 
     return (
         <>
-            <div className="d-flex justify-content-center align-items-center vh-100">
+            <div className="d-flex justify-content-center vh-100">
                 <Row>
-                    <Col className="justify-content-center">
-                        <div >
-                            <img scr={Img} alt="Logo" width="200"></img>
+                    <Col>
+                        <div id='imagem' className='mt-5 w-100  mb-3'>
                         </div>
                         <div className="border p-5">
                             <Form>

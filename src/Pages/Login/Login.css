@@ -1,0 +1,7 @@
+#imagem{
+    background-image: url('./img/CNBR.jpg');
+    height: 35%;
+    background-color: red;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}

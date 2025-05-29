@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './ProdutoList.css';
 import { getProdutos, deleteProduto } from '../../service/produto.service';
+import { Row, Col, Container, Form, Spinner } from 'react-bootstrap';
+
 
 function ProdutoList() {
   const [produtos, setProdutos] = useState([]);
   const [codigoProduto, setCodigoProduto] = useState('');
   const [quantidade, setQuantidade] = useState('');
 
-  const fetchProdutos = async () => {
+  const busacarProdutos = async () => {
     const data = await getProdutos();
     if (Array.isArray(data)) {
       setProdutos(data);
@@ -21,13 +23,13 @@ function ProdutoList() {
   };
 
   useEffect(() => {
-    fetchProdutos();
+    busacarProdutos();
   }, []);
 
   const deletarProduto = async (id) => {
     try {
       await deleteProduto(id);
-      fetchProdutos();
+      busacarProdutos();
     } catch (error) {
       console.error('Erro ao deletar produto:', error);
     }
@@ -62,7 +64,7 @@ function ProdutoList() {
         setCodigoProduto('');
         setQuantidade('');
 
-        fetchProdutos();
+        busacarProdutos();
       } catch (err) {
         console.error('Erro ao enviar produto: ', err);
       }
@@ -73,22 +75,56 @@ function ProdutoList() {
 
   return (
     <>
-      <div>
-        {produtos.length > 0 ? (
-          produtos.map((produto) => (
-            <div key={produto.id} className="produto-item">
-              <p>
-                Código: {produto.codigo} | Quantidade: {produto.quantidade}
-              </p>
-              <button onClick={() => deletarProduto(produto.id)}>Excluir</button>
-            </div>
-          ))
-        ) : (
-          <p>Nenhum produto encontrado.</p>
-        )}
-      </div>
+      <Container fluid className='vh-100'>
+        <Row className='px-0'>
+          <Col sm={3} className='menu vh-100'>
+            <h1>Menu</h1>
+          </Col>
+          {produtos.length > 0 ? (
+            <Col className=' vh-100'>
+              <Row>
+                <h1>nav</h1>
+              </Row>
+              <Row>
+                <Container fluid>
+                  <Row className='titulos px-0'>
+                    <Col lg={2}></Col>
+                    <Col>Código</Col>
+                    <Col>Quantidade</Col>
+                  </Row>
+                  {produtos.map((produto) => (
+                    <>
+                      <Row className='linha px-0'>
+                        <Col lg={2}>
+                          <Form.Check type="checkbox" />
+                        </Col>
+                        <Col className='celula'>
+                          <p>{produto.codigo}</p>
+                        </Col>
+                        <Col className='celula'>
+                          <p>{produto.quantidade}</p>
+                        </Col>
+                      </Row>
+                    </>
+                  ))}
 
-      <div className="Form">
+                </Container>
+              </Row>
+            </Col>
+          ) : (
+
+            <Col className='d-flex justify-content-center align-items-center vh-100'>
+
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+
+            </Col>
+          )}
+        </Row>
+      </Container >
+
+      {/* <div className="Form">
         <label>Código:</label>
         <input
           type="text"
@@ -97,7 +133,7 @@ function ProdutoList() {
           onChange={(e) => setCodigoProduto(e.target.value)}
         />
         <br />
-
+        <i class="bi bi-0-circle"></i>
         <label>Quantidade:</label>
         <input
           type="number"
@@ -120,7 +156,7 @@ function ProdutoList() {
           value="Deletar Produto"
           onClick={enviarProduto}
         />
-      </div>
+      </div> */}
     </>
   );
 }
