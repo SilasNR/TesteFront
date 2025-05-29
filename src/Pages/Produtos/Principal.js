@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ProdutoList.css';
+import './Principal.css';
 import { getProdutos, deleteProdutos, createProduto} from '../../service/produto.service';
 import { Row, Col, Container, Form, Spinner } from 'react-bootstrap';
 
@@ -35,8 +35,8 @@ function ProdutoList() {
 
     try {
       await createProduto(jsonProduto);
-      setCodigoProduto('');
-      setQuantidade('');
+      // setCodigoProduto('');
+      // setQuantidade('');
       busacarProdutos();
     } catch (err) {
       console.error('Erro ao cadastrar produto:', err);
@@ -89,7 +89,7 @@ function ProdutoList() {
                 <h1>nav {selected}</h1>
               </Row>
               <Row>
-                <Container fluid>
+                <Container fluid className='h-50 d-inline-block lista'>
                   <Row className='titulos px-0'>
                     <Col lg={2}><i id="lixo" class="bi bi-trash3" onClick={deletarSelecionados}></i></Col>
                     <Col>Código</Col>

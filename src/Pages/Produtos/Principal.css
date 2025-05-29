@@ -3,6 +3,10 @@
     padding: 10px 50px;
 }
 
+.lista{
+    overflow-y: auto;
+}
+
 .linha{
     border: 1px black solid;
 }
