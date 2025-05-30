@@ -78,7 +78,7 @@ function ProdutoList() {
 
   return (
     <>
-      <Container fluid className='vh-100'>
+      {/* <Container fluid className='vh-100'>
         <Row className='px-0'>
           <Col sm={3} className='menu vh-100'>
             <h1>Pedidos</h1>
@@ -106,6 +106,58 @@ function ProdutoList() {
                         </Col>
                         <Col className='celula'>
                           <p>{produto.quantidade}</p>
+                        </Col>
+                      </Row>
+                    </>
+                  ))}
+
+                </Container>
+              </Row>
+            </Col>
+          ) : (
+
+            <Col className='d-flex justify-content-center align-items-center vh-100'>
+
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+
+            </Col>
+          )}
+        </Row>
+      </Container > */}
+      <Container fluid className='vh-100'>
+        <Row className='px-0'>
+          <Col sm={2} className='menu vh-100'>
+            <h1>Pedidos</h1>
+          </Col>
+          {produtos.length > 0 ? (
+            <Col className=' vh-100'>
+              <Row>
+                <h1>nav {selected}</h1>
+              </Row>
+              <Row className='lista'>
+                <Container fluid className='h-50 d-inline-block'>
+                  <Row className='titulos px-0'>
+                    <Col lg={2}><i id="lixo" class="bi bi-trash3" onClick={deletarSelecionados}></i></Col>
+                    <Col>Código</Col>
+                    <Col>Peças</Col>
+                    <Col>Caixas</Col>
+                  </Row>
+                  {produtos.map((produto) => (
+                    <>
+                      <Row key={produto.id} className='linha px-0'>
+                        <Col lg={2}>
+                          <Form.Check type="checkbox" value={produto.id} onChange={mudarCheckbox} />
+                        </Col>
+                        <Col className='celula'>
+                          <p>{produto.codigo}</p>
+                        </Col>
+                        <Col className='celula'>
+                          <p>{produto.quantidade}</p>
+                        </Col>
+                        <Col className='celula'>
+                          <p>{produto.quantidade / 10}</p>
                         </Col>
                       </Row>
                     </>

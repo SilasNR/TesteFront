@@ -5,6 +5,12 @@
 
 .lista{
     overflow-y: auto;
+    height: 80%;
+    width: 98%;
+    margin: 1%;
+
+    border: black 1px solid;
+    border-radius: 10px;
 }
 
 .linha{
@@ -19,6 +25,8 @@
     background-color: rgb(0, 81, 148);
     color: white;
     font-size: 20px;
+
+    position: relative;
 }
 
 .celula{
