@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Principal.css';
-import { getProdutos, deleteProdutos, createProduto} from '../../service/produto.service';
+import { getProdutos, deleteProdutos, createProduto } from '../../service/produto.service';
 import { Row, Col, Container, Form, Spinner } from 'react-bootstrap';
+import Navegacao from './Componentes/Navegacao/Navegacao.js'
+import Pesquisa from './Componentes/Pesquisa/Pesquisa.js'
 
 
 function ProdutoList() {
@@ -27,24 +29,24 @@ function ProdutoList() {
   }, []);
 
   const enviarProduto = async () => {
-  if (codigoProduto.trim() !== '') {
-    const jsonProduto = {
-      codigo: codigoProduto.trim(),
-      quantidade: parseInt(quantidade),
-    };
+    if (codigoProduto.trim() !== '') {
+      const jsonProduto = {
+        codigo: codigoProduto.trim(),
+        quantidade: parseInt(quantidade),
+      };
 
-    try {
-      await createProduto(jsonProduto);
-      // setCodigoProduto('');
-      // setQuantidade('');
-      busacarProdutos();
-    } catch (err) {
-      console.error('Erro ao cadastrar produto:', err);
+      try {
+        await createProduto(jsonProduto);
+        // setCodigoProduto('');
+        // setQuantidade('');
+        busacarProdutos();
+      } catch (err) {
+        console.error('Erro ao cadastrar produto:', err);
+      }
+    } else {
+      console.warn('Código do produto está vazio');
     }
-  } else {
-    console.warn('Código do produto está vazio');
-  }
-};
+  };
 
   const [selected, setSelected] = useState([]);
 
@@ -61,7 +63,7 @@ function ProdutoList() {
 
   const deletarSelecionados = async () => {
     console.log(selected);
-    
+
     if (!window.confirm('Tem certeza que deseja deletar os produtos selecionados?')) {
       return;
     }
@@ -129,12 +131,17 @@ function ProdutoList() {
       <Container fluid className='vh-100'>
         <Row className='px-0'>
           <Col sm={2} className='menu vh-100'>
-            <h1>Pedidos</h1>
+            <Navegacao titulo="Estoque Frente"/>
+            <Navegacao titulo="Estoque Fundo"/>
+            <Navegacao titulo="Registro de entrada"/>
+            <Navegacao titulo="Registros de saída"/>
+            <Navegacao titulo="Correção"/>
+            <Navegacao titulo="Histórico"/>
           </Col>
           {produtos.length > 0 ? (
             <Col className=' vh-100'>
               <Row>
-                <h1>nav {selected}</h1>
+                <Pesquisa />
               </Row>
               <Row className='lista'>
                 <Container fluid className='h-50 d-inline-block'>
@@ -145,22 +152,22 @@ function ProdutoList() {
                     <Col>Caixas</Col>
                   </Row>
                   {produtos.map((produto) => (
-                    <>
-                      <Row key={produto.id} className='linha px-0'>
-                        <Col lg={2}>
-                          <Form.Check type="checkbox" value={produto.id} onChange={mudarCheckbox} />
-                        </Col>
-                        <Col className='celula'>
-                          <p>{produto.codigo}</p>
-                        </Col>
-                        <Col className='celula'>
-                          <p>{produto.quantidade}</p>
-                        </Col>
-                        <Col className='celula'>
-                          <p>{produto.quantidade / 10}</p>
-                        </Col>
-                      </Row>
-                    </>
+
+                    <Row key={produto.id} className='linha px-0'>
+                      <Col lg={2}>
+                        <Form.Check type="checkbox" value={produto.id} onChange={mudarCheckbox} />
+                      </Col>
+                      <Col className='celula'>
+                        <p>{produto.codigo}</p>
+                      </Col>
+                      <Col className='celula'>
+                        <p>{produto.quantidade}</p>
+                      </Col>
+                      <Col className='celula'>
+                        <p>{produto.quantidade / 10}</p>
+                      </Col>
+                    </Row>
+
                   ))}
 
                 </Container>
@@ -202,13 +209,6 @@ function ProdutoList() {
           type="button"
           id="btnEnviarProduto"
           value="Cadastrar Produto"
-          onClick={enviarProduto}
-        />
-
-        <input
-          type="button"
-          id="btnEnviarProduto"
-          value="Deletar Produto"
           onClick={enviarProduto}
         />
       </div>

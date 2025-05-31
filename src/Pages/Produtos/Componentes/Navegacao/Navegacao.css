@@ -1,0 +1,7 @@
+.opcao{
+    cursor: pointer;
+
+}
+.opcao:hover{
+    background-color: rgb(119, 106, 241);
+}
