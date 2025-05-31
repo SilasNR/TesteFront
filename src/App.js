@@ -1,11 +1,11 @@
 //import React from 'react';
-import ProdutoList from './Pages/Produtos/ProdutoList';
+import PrincipalProdutos from './Pages/Produtos/Principal';
 //import Login from './Pages/Login/Login'
 
 function App() {
   return (
     <div className="App">
-      <ProdutoList/>
+      <PrincipalProdutos/>
     </div>
   );
 }

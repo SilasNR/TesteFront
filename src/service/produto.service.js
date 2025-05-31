@@ -4,6 +4,8 @@ import axios from 'axios';
 //const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
 const URL2 = "https://backend-basico-production-b95f.up.railway.app/produtos";
 
+
+/////////////////////////////////////////////////////////////////////// Get Produtos
 export const getProdutos = async () => {
   try {
     const response = await axios.get(URL2);
@@ -12,9 +14,9 @@ export const getProdutos = async () => {
     console.error('Erro ao buscar produtos', error);
     return []; // 👈 evita erro no .map() se algo der errado
   }
-
 };
 
+/////////////////////////////////////////////////////////////////////// Post Produto
 export const createProduto = async (produto) => {
   try {
     const response = await fetch(
@@ -41,7 +43,7 @@ export const createProduto = async (produto) => {
   }
 };
 
-
+//////////////////////////////////////////////////////////////////////////////////Delete Produto
 // export const deleteProdutos = async (ids) => {
 //   try {
 //     const response = await axios.delete(`${API_URL}`, {
@@ -54,6 +56,7 @@ export const createProduto = async (produto) => {
 //   }
 // };
 
+//////////////////////////////////////////////////////////////////////////////// Delete Produtos (Post)
 export const deleteProdutos = async (ids) => {
   try {
     const response = await axios.post(`${URL2}/delete-many`, ids);
@@ -63,3 +66,4 @@ export const deleteProdutos = async (ids) => {
     throw error;
   }
 };
+
