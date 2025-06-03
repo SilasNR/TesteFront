@@ -1,0 +1,46 @@
+.Form{
+    background-color: rgb(160, 190, 216);
+    padding: 10px 50px;
+}
+
+.lista{
+    overflow-y: auto;
+    height: 90%;
+    width: 98%;
+    margin: 1%;
+
+    border: black 1px solid;
+    border-radius: 10px;
+}
+
+.linha{
+    border: 1px black solid;
+}
+.linha:hover{
+    background-color: rgb(197, 231, 245);
+}
+
+
+.titulos{
+    background-color: rgb(0, 81, 148);
+    color: white;
+    font-size: 20px;
+
+    position: relative;
+}
+
+.celula{
+    border: 1px black solid;
+}
+
+.menu{
+    border: 1px solid black;
+    
+}
+
+#lixo{
+    cursor: pointer;   
+}
+#lixo:hover{
+    color: red;
+}

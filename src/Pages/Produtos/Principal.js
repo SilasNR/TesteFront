@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './Principal.css';
-import { getProdutos, deleteProdutos, createProduto } from '../../service/produto.service';
-import { Row, Col, Container, Form, Spinner } from 'react-bootstrap';
-import Navegacao from './Componentes/Navegacao/Navegacao.js'
-import Pesquisa from './Componentes/Pesquisa/Pesquisa.js'
+import { getProdutos, deleteProdutos, createProduto } from '../../service/produto.service.js';
+import { Row, Col, Container, Spinner } from 'react-bootstrap';
+import { Outlet } from "react-router-dom";
 
+
+import Navegacao from './Componentes/Navegacao/Navegacao.js'
+import SuperiorNavegacao from "./Componentes/SuperiorNavegacao/SuperiorNavegacao.js";
 
 function ProdutoList() {
-  const [produtos, setProdutos] = useState([]);
   const [codigoProduto, setCodigoProduto] = useState('');
   const [quantidade, setQuantidade] = useState('');
 
-  const busacarProdutos = async () => {
-    const data = await getProdutos();
-    if (Array.isArray(data)) {
-      setProdutos(data);
-      console.log("buscando ...");
 
-    } else {
-      setProdutos([]);
-      console.log("não encontrado ...");
 
-    }
-  };
-
-  useEffect(() => {
-    busacarProdutos();
-  }, []);
-
+  /////////////////////////////////////////////////////////////////Enviar Pruduto 
   const enviarProduto = async () => {
     if (codigoProduto.trim() !== '') {
       const jsonProduto = {
@@ -37,9 +24,8 @@ function ProdutoList() {
 
       try {
         await createProduto(jsonProduto);
-        // setCodigoProduto('');
-        // setQuantidade('');
-        busacarProdutos();
+        setCodigoProduto('');
+        setQuantidade('');
       } catch (err) {
         console.error('Erro ao cadastrar produto:', err);
       }
@@ -50,10 +36,10 @@ function ProdutoList() {
 
   const [selected, setSelected] = useState([]);
 
+  ////////////////////////////////////////////////////////////Selecionar Checkbox
   const mudarCheckbox = (e) => {
     const value = Number(e.target.value);
     const isChecked = e.target.checked;
-
     if (isChecked) {
       setSelected([...selected, value]);
     } else {
@@ -61,16 +47,14 @@ function ProdutoList() {
     }
   };
 
+  ////////////////////////////////////////////////////////Deletar
   const deletarSelecionados = async () => {
     console.log(selected);
-
     if (!window.confirm('Tem certeza que deseja deletar os produtos selecionados?')) {
       return;
     }
-
     try {
       await deleteProdutos(selected);
-      busacarProdutos();
       setSelected([]);
       console.log('Produtos deletados com sucesso!');
     } catch (error) {
@@ -80,109 +64,14 @@ function ProdutoList() {
 
   return (
     <>
-      {/* <Container fluid className='vh-100'>
-        <Row className='px-0'>
-          <Col sm={3} className='menu vh-100'>
-            <h1>Pedidos</h1>
-          </Col>
-          {produtos.length > 0 ? (
-            <Col className=' vh-100'>
-              <Row>
-                <h1>nav {selected}</h1>
-              </Row>
-              <Row>
-                <Container fluid className='h-50 d-inline-block lista'>
-                  <Row className='titulos px-0'>
-                    <Col lg={2}><i id="lixo" class="bi bi-trash3" onClick={deletarSelecionados}></i></Col>
-                    <Col>Código</Col>
-                    <Col>Quantidade</Col>
-                  </Row>
-                  {produtos.map((produto) => (
-                    <>
-                      <Row key={produto.id} className='linha px-0'>
-                        <Col lg={2}>
-                          <Form.Check type="checkbox" value={produto.id} onChange={mudarCheckbox} />
-                        </Col>
-                        <Col className='celula'>
-                          <p>{produto.codigo}</p>
-                        </Col>
-                        <Col className='celula'>
-                          <p>{produto.quantidade}</p>
-                        </Col>
-                      </Row>
-                    </>
-                  ))}
-
-                </Container>
-              </Row>
-            </Col>
-          ) : (
-
-            <Col className='d-flex justify-content-center align-items-center vh-100'>
-
-              <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-
-            </Col>
-          )}
-        </Row>
-      </Container > */}
       <Container fluid className='vh-100'>
         <Row className='px-0'>
-          <Col sm={2} className='menu vh-100'>
-            <Navegacao titulo="Estoque Frente"/>
-            <Navegacao titulo="Estoque Fundo"/>
-            <Navegacao titulo="Registro de entrada"/>
-            <Navegacao titulo="Registros de saída"/>
-            <Navegacao titulo="Correção"/>
-            <Navegacao titulo="Histórico"/>
+          <Navegacao />
+          <Col>
+            <SuperiorNavegacao />
+            <Outlet />
           </Col>
-          {produtos.length > 0 ? (
-            <Col className=' vh-100'>
-              <Row>
-                <Pesquisa />
-              </Row>
-              <Row className='lista'>
-                <Container fluid className='h-50 d-inline-block'>
-                  <Row className='titulos px-0'>
-                    <Col lg={2}><i id="lixo" class="bi bi-trash3" onClick={deletarSelecionados}></i></Col>
-                    <Col>Código</Col>
-                    <Col>Peças</Col>
-                    <Col>Caixas</Col>
-                  </Row>
-                  {produtos.map((produto) => (
 
-                    <Row key={produto.id} className='linha px-0'>
-                      <Col lg={2}>
-                        <Form.Check type="checkbox" value={produto.id} onChange={mudarCheckbox} />
-                      </Col>
-                      <Col className='celula'>
-                        <p>{produto.codigo}</p>
-                      </Col>
-                      <Col className='celula'>
-                        <p>{produto.quantidade}</p>
-                      </Col>
-                      <Col className='celula'>
-                        <p>{produto.quantidade / 10}</p>
-                      </Col>
-                    </Row>
-
-                  ))}
-
-                </Container>
-              </Row>
-            </Col>
-          ) : (
-
-            <Col className='d-flex justify-content-center align-items-center vh-100'>
-
-              <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-
-            </Col>
-          )}
         </Row>
       </Container >
 

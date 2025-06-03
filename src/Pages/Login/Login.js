@@ -1,8 +1,9 @@
 //import React, { useEffect, useState } from 'react';
 import './Login.css'
 //import {   } from '../service/produto.service';
-import { Row, Col, Button,Form} from 'react-bootstrap';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 //import CNBR from './img/CNBR.jpg'
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -28,9 +29,11 @@ function Login() {
                                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                     <Form.Check type="checkbox" label="Lembrar" />
                                 </Form.Group>
-                                <Button variant="primary" type="submit">
-                                    Entrar
-                                </Button>
+                                <Link to="/Painel">
+                                    <Button variant="primary" type="submit">
+                                        Entrar
+                                    </Button>
+                                </Link>
                             </Form>
                         </div>
                     </Col>

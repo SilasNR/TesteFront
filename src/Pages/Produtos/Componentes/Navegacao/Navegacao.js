@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
+//import React, { useEffect, useState } from 'react';
 import { Row, Col, Container, Form, Spinner } from 'react-bootstrap';
-import "./Navegacao.css"
+import "./Navegacao.css";
+import Botao from './Botao.js';
 
-function Navegacao(param){
-    const [display, setDisplay] = useState("block");
+function Navegacao(param) {
+    //const [display, setDisplay] = useState("block");
 
 
-    return(
+    return (
         <>
-            <Row fluid style={{display:display}} onClick={() => {setDisplay("none")}} className='opcao px-0'>
-                <div><p>{param.titulo}</p></div>
-            </Row>
+            <Col sm={2} className='menu vh-100'>
+                <h2>CN BR Sistem</h2>
+
+                <Botao titulo="Painel" />
+                <Botao titulo="Produtos" />
+                <Botao titulo="Usuário" />
+                <Botao titulo="Configurações" />
+                <Botao titulo="Ajuda" />
+            </Col>
         </>
     )
 }
