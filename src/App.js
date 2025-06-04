@@ -1,12 +1,8 @@
-//import React from 'react';
-import PrincipalProdutos from './Pages/Produtos/Principal';
-//import Login from './Pages/Login/Login'
+import Rotas from './Rotas.js';
 
 function App() {
   return (
-    <div className="App">
-      <PrincipalProdutos/>
-    </div>
+      <Rotas/>
   );
 }
 
