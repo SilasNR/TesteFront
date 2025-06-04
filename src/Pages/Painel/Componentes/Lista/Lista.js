@@ -1,11 +1,11 @@
 import './Lista.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getProdutos } from '../../../../service/produto.service.js';
 import { Row, Col, Form, Container, Spinner} from 'react-bootstrap';
 
 
 
-import Pesquisa from '../Pesquisa/Pesquisa.js'
+//import Pesquisa from '../Pesquisa/Pesquisa.js'
 
 
 function Lista(param) {
@@ -36,7 +36,7 @@ function Lista(param) {
         <Col className=' vh-100'>
           <Row>
             <Row className='titulos' >
-              <Col lg={2}><i id="lixo" class="bi bi-trash3" onClick={param.deletarSelecionados}></i></Col>
+              <Col lg={1}>{/*<i id="lixo" class="bi bi-trash3" onClick={param.deletarSelecionados}></i>*/}</Col>
               <Col>Código</Col>
               <Col>Peças</Col>
               <Col>Caixas</Col>
@@ -46,7 +46,7 @@ function Lista(param) {
                 {produtos.map((produto) => (
 
                   <Row key={produto.id} className='linha '>
-                    <Col lg={2}>
+                    <Col lg={1}>
                       <Form.Check type="checkbox" value={produto.id} onChange={param.mudarCheckbox} />
                     </Col>
                     <Col className='celula'>
@@ -59,8 +59,6 @@ function Lista(param) {
                       <p>{produto.quantidade / 10}</p>
                     </Col>
                   </Row>
-
-
                 ))}
               </Container>
             </Row >

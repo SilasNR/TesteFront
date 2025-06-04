@@ -1,46 +1,51 @@
-.Form{
-    background-color: rgb(160, 190, 216);
+.Form {
+    background-color: 
+        rgb(160, 190, 216)
+    ;
     padding: 10px 50px;
 }
 
-.lista{
+.lista {
     overflow-y: auto;
-    height: 90%;
+    height: 680px;
     width: 98%;
-    margin: 1%;
-
+    margin:0% 1%;
     border: black 1px solid;
-    border-radius: 10px;
+    border-radius:0px 0px 10px 10px ;
+    padding: 0px;
 }
 
-.linha{
+.linha {
     border: 1px black solid;
 }
-.linha:hover{
+
+.linha:hover {
     background-color: rgb(197, 231, 245);
 }
 
 
-.titulos{
+.titulos {
     background-color: rgb(0, 81, 148);
     color: white;
     font-size: 20px;
-
-    position: relative;
+    margin: 0% 1%;
+    width: 98%;
+    border-radius: 10px 10px 0px 0px;
 }
 
-.celula{
+.celula {
     border: 1px black solid;
 }
 
-.menu{
+.menu {
     border: 1px solid black;
-    
+
 }
 
-#lixo{
-    cursor: pointer;   
+#lixo {
+    cursor: pointer;
 }
-#lixo:hover{
+
+#lixo:hover {
     color: red;
 }
