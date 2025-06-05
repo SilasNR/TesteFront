@@ -1,74 +1,59 @@
 import './Lista.css';
-import { useEffect, useState } from 'react';
-import { getProdutos } from '../../../../service/produto.service.js';
-import { Row, Col, Form, Container, Spinner} from 'react-bootstrap';
+//import { useState } from 'react';
+import { Row, Col, Form, Container, Spinner } from 'react-bootstrap';
 
 
 
-//import Pesquisa from '../Pesquisa/Pesquisa.js'
+function Lista(param) { //////////// parametros necessários : valores={} titulos={} campos={} resposta{}
+
+  new Promise((resolveOuter) => {
+    resolveOuter(
+      new Promise((resolveInner) => {
+        setTimeout(resolveInner, 1000);
+      }),
+    );
+  });
 
 
-function Lista(param) {
-
-  const [produtos, setProdutos] = useState([]);
-
-  //////////////////////////////////////////////////////// Buscar produtos
-  const busacarProdutos = async () => {
-    const data = await getProdutos();
-    if (Array.isArray(data)) {
-      setProdutos(data);
-      console.log("buscando ...");
-
-    } else {
-      setProdutos([]);
-      console.log("não encontrado ...");
-
-    }
-  };
-
-  useEffect(() => {
-    busacarProdutos();
-  }, []);
 
   return (
     <>
-      {produtos.length > 0 ? (
-        <Col className=' vh-100'>
-          <Row>
-            <Row className='titulos' >
-              <Col lg={1}>{/*<i id="lixo" class="bi bi-trash3" onClick={param.deletarSelecionados}></i>*/}</Col>
-              <Col>Código</Col>
-              <Col>Peças</Col>
-              <Col>Caixas</Col>
-            </Row>
-            <Row className='lista'>
-              <Container fluid className='h-50 d-inline-block'>
-                {produtos.map((produto) => (
-
-                  <Row key={produto.id} className='linha '>
-                    <Col lg={1}>
-                      <Form.Check type="checkbox" value={produto.id} onChange={param.mudarCheckbox} />
-                    </Col>
-                    <Col className='celula'>
-                      <p>{produto.codigo}</p>
-                    </Col>
-                    <Col className='celula'>
-                      <p>{produto.quantidade}</p>
-                    </Col>
-                    <Col className='celula'>
-                      <p>{produto.quantidade / 10}</p>
-                    </Col>
-                  </Row>
-                ))}
-              </Container>
-            </Row >
+      {param.valores.length > 0 ? (
+        <Row>
+          <Row className='titulos' >
+            {param.titulos.map((titulo, index) => (
+              <Col key={index} lg={index === 0 ? 1 : undefined}>
+                {titulo}
+              </Col>
+            ))}
           </Row>
-        </Col>
-      ) : (
-        <Col className='d-flex justify-content-center align-items-center vh-100'>
+          <Row className='lista'>
+            <Container fluid className='h-50 d-inline-block'>
+              {param.valores.map((valor) => (
+
+                <Row key={valor.id} className='linha '>
+                  {param.campos.map((campo, index) => (
+                    <Col className='celula' key={index} lg={index === 0 ? 1 : undefined}>
+                      {campo === "" ? <Form.Check type="checkbox" value={valor.id} onChange={param.mudarCheckbox} />
+                        : index === 1 ? <p>{valor[campo]}</p>
+                          : index === 2 ? <p>{valor[campo]}</p>
+                            : <p>{valor[campo] / 10}</p>}
+                    </Col>
+                  ))}
+                </Row>
+              ))}
+            </Container>
+          </Row >
+        </Row>
+      ) : param.resposta !== "Nada" ? (
+        <Col className='d-flex justify-content-center align-items-center'>
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
+        </Col>
+      ) : (
+        <Col>
+          <h1>Nada Encontrado</h1>
         </Col>
       )}
     </>
