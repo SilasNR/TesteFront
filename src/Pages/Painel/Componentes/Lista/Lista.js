@@ -29,11 +29,10 @@ function Lista(param) { //////////// parametros necessários : valores={} titulo
           </Row>
           <Row className='lista'>
             <Container fluid className='h-50 d-inline-block'>
-              {param.valores.map((valor) => (
-
-                <Row key={valor.id} className='linha '>
+              {param.valores.map((valor, index) => (
+                <Row key={valor.id} className='linha' onClick={() => param.abrirPedido(index)}>
                   {param.campos.map((campo, index) => (
-                    <Col className='celula' key={index} lg={index === 0 ? 1 : undefined}>
+                    <Col className='celula' key={index} lg={index === 0 ? 1 : undefined} >
                       {campo === "" ? <Form.Check type="checkbox" value={valor.id} onChange={param.mudarCheckbox} />
                         : index === 1 ? <p>{valor[campo]}</p>
                           : index === 2 ? <p>{valor[campo]}</p>
@@ -45,7 +44,7 @@ function Lista(param) { //////////// parametros necessários : valores={} titulo
             </Container>
           </Row >
         </Row>
-      ) : param.resposta !== "Nada" ? (
+      ) : param.resposta === "" ? (
         <Col className='d-flex justify-content-center align-items-center'>
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
@@ -53,7 +52,7 @@ function Lista(param) { //////////// parametros necessários : valores={} titulo
         </Col>
       ) : (
         <Col>
-          <h1>Nada Encontrado</h1>
+          <p>{param.resposta}</p>
         </Col>
       )}
     </>

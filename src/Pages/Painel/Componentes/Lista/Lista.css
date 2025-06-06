@@ -7,7 +7,7 @@
 
 .lista {
     overflow-y: auto;
-    height: 650px;
+    max-height: 650px;
     width: 98%;
     margin:0% 1%;
     border-radius:0px 0px 10px 10px ;
@@ -17,6 +17,7 @@
 
 .linha:hover {
     background-color: rgb(197, 231, 245);
+    cursor: pointer;
 }
 
 

@@ -2,7 +2,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import '../../Principal.css'
 import './Filtro.css'
 
-function Filtro() {
+function Filtro(param) {
 
     return (
         <>
@@ -14,7 +14,7 @@ function Filtro() {
                     <Button variant="danger">Excluir</Button>
                 </Col>
                 <Col xs lg="1" >
-                    <Button variant="success">Novo</Button>
+                    <Button variant="success" onClick={param.mudarModal}>Novo</Button>
                 </Col>
             </Row>
         </>
