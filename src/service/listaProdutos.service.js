@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //http://localhost:3001/
 //const API_URL = 'https://backend-basico-production-b95f.up.railway.app/';
-const URL2 = "http://localhost:3001/produto-lista";
+const URL2 = "https://backend-basico-production-b95f.up.railway.app/produto-lista";
 
 
 /////////////////////////////////////////////////////////////////////// Get Pedidos
