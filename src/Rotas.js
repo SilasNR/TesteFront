@@ -9,7 +9,7 @@ import Produtos from './Pages/Produtos/Produtos.js'
 import Usuarios from './Pages/Usuarios/Usuarios.js'
 
 /*--------------------------Conteudo ---->*/
-import Lista from './Pages/Painel/Componentes/Lista/Lista.js'
+import Estoque from './Pages/Painel/Componentes/Estoque/Estoque.js'
 import Pedido from './Pages/Painel/Componentes/Pedido/Pedido.js'
 import Danificado from './Pages/Painel/Componentes/Danificado/Danificado.js'
 import Devolucao from './Pages/Painel/Componentes/Devolucao/Devolucao.js'
@@ -31,7 +31,7 @@ const Rotas = createBrowserRouter([
         },
         {
           path: "/Painel/Estoque",
-          element: <Lista />,
+          element: <Estoque />,
         },
         {
           path: "/Painel/Pedido",

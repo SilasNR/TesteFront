@@ -7,20 +7,17 @@
 
 .lista {
     overflow-y: auto;
-    height: 680px;
+    max-height: 650px;
     width: 98%;
     margin:0% 1%;
-    border: black 1px solid;
     border-radius:0px 0px 10px 10px ;
     padding: 0px;
-}
-
-.linha {
-    border: 1px black solid;
+    border: 1px solid black;
 }
 
 .linha:hover {
     background-color: rgb(197, 231, 245);
+    cursor: pointer;
 }
 
 
@@ -35,17 +32,4 @@
 
 .celula {
     border: 1px black solid;
-}
-
-.menu {
-    border: 1px solid black;
-
-}
-
-#lixo {
-    cursor: pointer;
-}
-
-#lixo:hover {
-    color: red;
 }

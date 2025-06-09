@@ -1,10 +1,12 @@
-
+import Lista from '../Lista/Lista.js'
+import { useState } from 'react';
 
 function Danificados() {
+    const [v, setV] = useState([]);
 
     return (
         <>
-            <h1>Danificados</h1>
+            <Lista resposta="" valores={v}/>
         </>
     )
 }

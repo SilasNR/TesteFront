@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //http://localhost:3001/produtos
 //const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
-const URL2 = "https://backend-basico-production-b95f.up.railway.app/produtos";
+const URL2 = "http://localhost:3001/produtos";
 
 
 /////////////////////////////////////////////////////////////////////// Get Produtos
@@ -11,7 +11,6 @@ export const getProdutos = async () => {
     const response = await axios.get(URL2);
     return response.data;
   } catch (error) {
-    console.error('Erro ao buscar produtos', error);
     return []; // 👈 evita erro no .map() se algo der errado
   }
 };
