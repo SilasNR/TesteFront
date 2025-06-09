@@ -56,7 +56,7 @@ function Estoque() {
 
     return (
         <>
-            <Lista valores={produtos} titulos={titulos} campos={campos}/>
+            <Lista valores={produtos} titulos={titulos} campos={campos} resposta=""/>
         </>
     )
 }

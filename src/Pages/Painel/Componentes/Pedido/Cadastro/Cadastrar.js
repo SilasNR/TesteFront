@@ -42,7 +42,7 @@ function Cadastrar(param) {
   
   const adicionarProd = () => {
     const prodLista = {
-      codigo: codigo,
+      codigoProduto: codigo,
       quantidade: quantidade
     };
 

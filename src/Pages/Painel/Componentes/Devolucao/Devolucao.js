@@ -1,11 +1,13 @@
-
+import Lista from '../Lista/Lista.js'
+import { useState } from 'react';
 
 
 function Devolucao() {
+    const [v, setV] = useState([]);
 
     return (
         <>
-            <h1>Devolução</h1>
+            <Lista resposta="" valores={v}/>
         </>
     )
 }
