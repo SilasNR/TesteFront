@@ -1,6 +1,7 @@
 import Lista from "../Lista/Lista.js"
 import { useEffect, useState } from 'react';
 import { getProdutos } from '../../../../service/produto.service.js';
+import Filtro from '../Filto/Filtro.js';
 
 function Estoque() {
     const [produtos, setProdutos] = useState([]);
@@ -56,7 +57,8 @@ function Estoque() {
 
     return (
         <>
-            <Lista valores={produtos} titulos={titulos} campos={campos} resposta=""/>
+            <Filtro /*mudarModal={mudarModal}*/ />
+            <Lista valores={produtos} titulos={titulos} campos={campos} resposta="Não há produtos em estoque"/>
         </>
     )
 }

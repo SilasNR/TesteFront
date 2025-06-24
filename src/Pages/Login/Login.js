@@ -29,7 +29,7 @@ function Login() {
                                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                     <Form.Check type="checkbox" label="Lembrar" />
                                 </Form.Group>
-                                <Link to="/Painel">
+                                <Link to="/Painel/Estoque">
                                     <Button variant="primary" type="submit">
                                         Entrar
                                     </Button>

@@ -19,9 +19,6 @@ function Navegacao() {
 
             <Botao titulo="Painel" ativo={getStyle("Painel")} />
             <Botao titulo="Produtos" ativo={getStyle("Produtos")} />
-            <Botao titulo="Usuarios" ativo={getStyle("Usuarios")} />
-            <Botao titulo="Configuracoes" ativo={getStyle("Configuracoes")} />
-            <Botao titulo="Ajuda" ativo={getStyle("Ajuda")} />
         </Col>
     );
 }

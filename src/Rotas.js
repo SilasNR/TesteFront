@@ -2,11 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import Principal from './Pages/Painel/Principal.js'
 import Login from './Pages/Login/Login.js'
-
-import Ajuda from './Pages/Ajuda/Ajuda.js'
-import Configuracoes from './Pages/Configuracoes/Configuracoes.js'
 import Produtos from './Pages/Produtos/Produtos.js'
-import Usuarios from './Pages/Usuarios/Usuarios.js'
+
 
 /*--------------------------Conteudo ---->*/
 import Estoque from './Pages/Painel/Componentes/Estoque/Estoque.js'
@@ -26,10 +23,6 @@ const Rotas = createBrowserRouter([
     children:
       [
         {
-          path: "/Painel/",
-          element: <h1>Painel</h1>,
-        },
-        {
           path: "/Painel/Estoque",
           element: <Estoque />,
         },
@@ -45,23 +38,11 @@ const Rotas = createBrowserRouter([
           path: "/Painel/Devolucao",
           element: <Devolucao />,
         },
+        {
+          path: "/Painel/Produto",
+          element: <Produtos />,
+        },
       ]
-  },
-  {
-    path: "/Ajuda",
-    element: <Ajuda />,
-  },
-  {
-    path: "/Configuracoes",
-    element: <Configuracoes />,
-  },
-  {
-    path: "/Produtos",
-    element: <Produtos />,
-  },
-  {
-    path: "/Usuarios",
-    element: <Usuarios />,
   },
 ]);
 

@@ -15,6 +15,7 @@ function SuperiorNavegacao() {
                 <Col className={ultimo === "Pedido" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Pedido"className={ultimo === "Pedido" ? "ativo" : ""}><h1>Pedidos</h1></Link></Col>
                 <Col className={ultimo === "Danificado" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Danificado" className={ultimo === "Danificado" ? "ativo" : ""}><h1>Danificados</h1></Link></Col>
                 <Col className={ultimo === "Devolucao" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Devolucao" className={ultimo === "Devolucao" ? "ativo" : ""}><h1>Devoluções</h1></Link></Col>
+                <Col className={ultimo === "Produto" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Produto" className={ultimo === "Produto" ? "ativo" : ""}><h1>Produto</h1></Link></Col>
             </Row>
         </>
     )

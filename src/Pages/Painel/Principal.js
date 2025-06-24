@@ -14,7 +14,6 @@ function ProdutoList() {
     <>
       <Container fluid className='vh-100'>
         <Row className='px-0'>
-          <Navegacao />
           <Col>
             <SuperiorNavegacao />
             <Outlet />
