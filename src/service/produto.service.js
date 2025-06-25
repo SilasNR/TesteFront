@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //http://localhost:3001/produtos
 //const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
-const URL2 = "https://backend-basico-production-b95f.up.railway.app/produtos";
+const URL2 = "http://localhost:3001/produtos";
 
 
 /////////////////////////////////////////////////////////////////////// Get Produtos
@@ -42,18 +42,18 @@ export const createProduto = async (produto) => {
   }
 };
 
-//////////////////////////////////////////////////////////////////////////////////Delete Produto
-// export const deleteProdutos = async (ids) => {
-//   try {
-//     const response = await axios.delete(`${API_URL}`, {
-//       data: ids, // <-- Importante! DELETE não usa 'body' diretamente no axios, usa 'data'
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.error('Erro ao deletar produtos', error);
-//     throw error;
-//   }
-// };
+////////////////////////////////////////////////////////////////////////////////Delete Produto
+export const deleteProduto = async (id) => {
+  try {
+    const response = await axios.delete(`${URL2}`, id/*,{/*
+      data: id, // <-- Importante! DELETE não usa 'body' diretamente no axios, usa 'data'
+    /}*/);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao deletar produtos', error);
+    throw error;
+  }
+};
 
 //////////////////////////////////////////////////////////////////////////////// Delete Produtos (Post)
 export const deleteProdutos = async (ids) => {

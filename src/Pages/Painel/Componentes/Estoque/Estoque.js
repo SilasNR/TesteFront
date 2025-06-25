@@ -43,12 +43,14 @@ function Estoque() {
 
     const [titulos] = useState([
         "Código",
+        "Observação",
         "Peças",
         "Caixas"
     ]);
 
     const [campos] = useState([
         "codigo",
+        "observacao",
         "quantidade",
         "quantidade"
     ]);
