@@ -22,7 +22,7 @@ function Lista(param) { //////////// parametros necessários : valores={} titulo
         <Row>
           <Row className='titulos' >
             {param.titulos.map((titulo, index) => (
-              <Col key={index} lg={index === 0 ? 1 : undefined}>
+              <Col key={index} lg={param.campos[index] === "" ? 1 : undefined}>
                 {titulo}
               </Col>
             ))}
@@ -30,10 +30,11 @@ function Lista(param) { //////////// parametros necessários : valores={} titulo
           <Row className='lista'>
             <Container fluid className='h-50 d-inline-block'>
               {param.valores.map((valor, index) => (
-                <Row key={valor.id} className='linha' onClick={() => param.abrirPedido(index)}>
+                <Row key={valor.id} className='linha' onClick={() =>  param.aoClicar(index) }>
                   {param.campos.map((campo, index) => (
-                    <Col className='celula' key={index} lg={index === 0 ? 1 : undefined} >
+                    <Col className='celula' key={index} lg={campo === "" ? 1 : undefined} >
                       {campo === "" ? <Form.Check type="checkbox" value={valor.id} onChange={param.mudarCheckbox} />
+                      : index === 0 ? <p>{valor[campo]}</p>
                         : index === 1 ? <p>{valor[campo]}</p>
                           : index === 2 ? <p>{valor[campo]}</p>
                             : <p>{valor[campo] / 10}</p>}

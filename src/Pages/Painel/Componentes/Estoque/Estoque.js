@@ -42,23 +42,25 @@ function Estoque() {
     }, []);
 
     const [titulos] = useState([
-        "",
         "Código",
         "Peças",
         "Caixas"
     ]);
 
     const [campos] = useState([
-        "",
         "codigo",
         "quantidade",
         "quantidade"
     ]);
 
+    const aoClicar = () => {
+
+    }
+
     return (
         <>
-            <Filtro /*mudarModal={mudarModal}*/ />
-            <Lista valores={produtos} titulos={titulos} campos={campos} resposta="Não há produtos em estoque"/>
+            <Filtro /*mudarModal={mudarModal}*/ tela="produto"/>
+            <Lista valores={produtos} titulos={titulos} campos={campos}  aoClicar={aoClicar} resposta="Não há produtos em estoque"/>
         </>
     )
 }
