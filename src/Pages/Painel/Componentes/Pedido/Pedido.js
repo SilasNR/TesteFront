@@ -39,13 +39,13 @@ function Pedido() {
     }, []);
 
     const [titulos] = useState([
-        "",
+
         "Numero",
         "Cliente"
     ]);
 
     const [campos] = useState([
-        "",
+
         "numero",
         "cliente"
     ]);
@@ -62,8 +62,8 @@ function Pedido() {
 
     return (
         <Col>
-            <Filtro mudarModal={mudarModal} />
-            <Lista valores={pedidos} titulos={titulos} campos={campos} resposta={resposta} abrirPedido={abrirPedido} />
+            <Filtro mudarModal={mudarModal} tela="pedido"/>
+            <Lista valores={pedidos} titulos={titulos} campos={campos} resposta={resposta} funcao="sim" aoClicar={abrirPedido} />
             <CadPedido
                 show={modalShow}
                 onHide={() => setModalShow(false)}
