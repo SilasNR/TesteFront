@@ -1,0 +1,58 @@
+import './Lista.css';
+//import { useState } from 'react';
+import { Row, Col, Form, Container, Spinner } from 'react-bootstrap';
+
+
+
+function Lista(param) { //////////// parametros necessários : valores={} titulos={} campos={} resposta{}
+
+
+  const calcularCaixas = (quantidade, porCaixa) => {
+    return Math.floor(quantidade / porCaixa);
+  };
+
+  return (
+    <>
+      {param.valores.length > 0 ? (
+        <Row>
+          <Row className='titulos' >
+            {param.titulos.map((titulo, index) => (
+              <Col key={index} lg={param.campos[index] === "" ? 1 : undefined}>
+                {titulo}
+              </Col>
+            ))}
+          </Row>
+          <Row className='lista'>
+            <Container fluid className='h-50 d-inline-block'>
+              {param.valores.map((valor, index) => (
+                <Row key={valor.id} className='linha' onClick={() => param.aoClicar(index)}>
+                  {param.campos.map((campo, index) => (
+                    <Col className='celula' key={index} lg={campo === "" ? 1 : undefined} >
+                      {campo === "" ? (<Form.Check type="checkbox" value={valor.id} onChange={param.mudarCheckbox} />)
+                        : campo === "codigo" ? (<p>CN{valor[campo]}{valor.observacao !== "" ? `-${valor.observacao}` : ""}</p>)
+                          : campo === "pacote" ? (<p>{valor.quantidade % valor.caixa}</p>)
+                            : campo === "caixa" ? (<p>{calcularCaixas(valor.quantidade, valor.caixa)}</p>)
+                              : (<p>{valor.quantidade}</p>)}
+                    </Col>
+                  ))}
+                </Row>
+              ))}
+            </Container>
+          </Row >
+        </Row>
+      ) : param.resposta === "" ? (
+        <Col className='d-flex justify-content-center align-items-center'>
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </Col>
+      ) : (
+        <Col>
+          <p>{param.resposta}</p>
+        </Col>
+      )}
+    </>
+  )
+}
+
+export default Lista

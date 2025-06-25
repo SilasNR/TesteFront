@@ -45,12 +45,10 @@ export const createProduto = async (produto) => {
 ////////////////////////////////////////////////////////////////////////////////Delete Produto
 export const deleteProduto = async (id) => {
   try {
-    const response = await axios.delete(`${URL2}`, id/*,{/*
-      data: id, // <-- Importante! DELETE não usa 'body' diretamente no axios, usa 'data'
-    /}*/);
+    const response = await axios.delete(`${URL2}/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Erro ao deletar produtos', error);
+    console.error('Erro ao deletar produto', error);
     throw error;
   }
 };

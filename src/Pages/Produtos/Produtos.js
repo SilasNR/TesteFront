@@ -9,22 +9,28 @@ import { createProduto, getProdutos, deleteProduto } from '../../service/produto
 function Produtos() {
     const [altID, setAltID] = useState();
     const [altCodigo, setAltCodigo] = useState();
+    const [altObservacao, setAltObservacao] = useState();
     const [altQuantidade, setAltQuantidade] = useState();
+    const [altPacote, setAltPacote] = useState();
+    const [altCaixa, setAltCaixa] = useState();
     const [produtos, setProdutos] = useState([]);
 
     const buscarAteEncontrar = async () => {////////////////////////////////////////////////////////////////Busca produtos no banco
         let encontrado = false;
-
-        while (!encontrado) {
+        let tentativas = 0;
+        const maxTentativas = 5;
+        while (!encontrado && tentativas < maxTentativas) {
+            tentativas++;
             const data = await getProdutos();
-
             if (Array.isArray(data) && data.length > 0) {
                 setProdutos(data);
+                console.log(produtos);
+
                 console.log("Encontrado");
                 encontrado = true;
             } else {
-                console.log("Buscando...");
                 await new Promise(resolve => setTimeout(resolve, 2000)); // espera 2 segundos 
+                console.log("Buscando...");
             }
         }
     };
@@ -41,24 +47,31 @@ function Produtos() {
         console.log(produto);
     }
 
-
     const [codigo, setCodigo] = useState();
     const [observacao, setObservacao] = useState();
     const [quantidade, setQuantidade] = useState();
+    const [pacote, setPacote] = useState();
+    const [caixa, setCaixa] = useState();
 
     //const [lista, setLista] = useState([]);
 
     const salvar = () => { //////////////////////////////////////////////////////////////Salvar Produto
         const produto = {
             codigo: codigo,
-            observacao: observacao,
+            observacao: observacao || "",
             quantidade: quantidade,
+            pacote:pacote,
+            caixa:caixa,
         }
 
         createProduto(produto).then(resultado => {
             // aqui você pode limpar o formulário
             setCodigo("");
+            setObservacao("");
             setQuantidade("");
+            setPacote("");
+            setCaixa("");
+            buscarAteEncontrar();
         })
             .catch(err => {
                 // tratar erro
@@ -77,6 +90,7 @@ function Produtos() {
             // aqui você pode limpar o formulário
             setCodigo("");
             setQuantidade("");
+            buscarAteEncontrar();
         })
             .catch(err => {
                 // tratar erro
@@ -86,11 +100,12 @@ function Produtos() {
 
     const deletar = () => { ////////////////////////////////////////////////////////////Deletar Produto
         console.log(altID);
-        
+
         deleteProduto(altID).then(resultado => {
             // aqui você pode limpar o formulário
             setAltCodigo("");
             setAltQuantidade("");
+            buscarAteEncontrar();
         })
             .catch(err => {
                 // tratar erro
@@ -132,16 +147,28 @@ function Produtos() {
                                 <Form.Group as={Col} controlId="formGridCodigo">
                                     <Form.Label>Código </Form.Label>
                                     <Form.Control type="text" placeholder="Código" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                </Form.Group> 
+                            </Row>
+                            <Row className="mb-3">
+                                 <Form.Group as={Col} controlId="formGridQuantidade">
                                     <Form.Label>Observação</Form.Label>
                                     <Form.Control type="text" placeholder="Obiservação" value={observacao} onChange={(e) => setObservacao(e.target.value)} />
                                 </Form.Group>
+                            </Row>
+                            <Row className="mb-3">
+                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                    <Form.Label>Quantidade Total</Form.Label>
+                                    <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
+                                </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade</Form.Label>
-                                    <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
+                                    <Form.Label>Quantidade do Pacote:</Form.Label>
+                                    <Form.Control type="text" placeholder="Pacote" value={pacote} onChange={(e) => setPacote(e.target.value)} />
+                                </Form.Group>
+
+                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                    <Form.Label>Quantidade da Caixa:</Form.Label>
+                                    <Form.Control type="text" placeholder="Caixa" value={caixa} onChange={(e) => setCaixa(e.target.value)} />
                                 </Form.Group>
                             </Row>
                         </Form>
@@ -162,7 +189,7 @@ function Produtos() {
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridCodigo">
                                     <Form.Label>Código </Form.Label>
-                                    <Form.Select aria-label="Default select example" onChange={(e) => { selecionado(e); setAltCodigo(e.target.value) }}>
+                                    <Form.Select aria-label="Default select example" value={altCodigo} onChange={(e) => { selecionado(e); setAltCodigo(e.target.value); }}>
 
                                         <option value="-1">...</option>
                                         {produtos.map((value, index) => (
@@ -172,24 +199,35 @@ function Produtos() {
                                     </Form.Select>
                                 </Form.Group>
                             </Row>
-                            <Row>
-                                <Form.Group as={Col} controlId="formGridQuantidade">
+                            <Row className="mb-3">
+                                 <Form.Group as={Col} controlId="formGridQuantidade">
                                     <Form.Label>Observação</Form.Label>
-                                    <Form.Control type="text" placeholder="Obiservação" />
+                                    <Form.Control type="text" placeholder="Obiservação" value={altObservacao} onChange={(e) => setAltObservacao(e.target.value)} />
+                                </Form.Group>
+                            </Row>
+                            <Row className="mb-3">
+                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                    <Form.Label>Quantidade Total</Form.Label>
+                                    <Form.Control type="text" placeholder="Quantidade" value={altQuantidade} onChange={(e) => setAltQuantidade(e.target.value)} />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade</Form.Label>
-                                    <Form.Control type="text" placeholder="Quantidade" value={altQuantidade} />
+                                    <Form.Label>Quantidade do Pacote:</Form.Label>
+                                    <Form.Control type="text" placeholder="Pacote" value={altPacote} onChange={(e) => setAltPacote(e.target.value)} />
+                                </Form.Group>
+
+                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                    <Form.Label>Quantidade da Caixa:</Form.Label>
+                                    <Form.Control type="text" placeholder="Caixa" value={altCaixa} onChange={(e) => setAltCaixa(e.target.value)} />
                                 </Form.Group>
                             </Row>
                         </Form>
                     </Col>
                 </Row>
-                <Row lg={6} className="justify-content-md-center dashboard">
+                <Row lg={6} className="justify-content-md-center dashboard mb-3">
                     <Stack gap={3} direction='horizontal'>
                         <Button onClick={() => { }}>Alterar</Button>
-                        <Button onClick={() => { deletar(); buscarAteEncontrar(); }}>Deletar</Button>
+                        <Button onClick={() => { deletar(); }}>Deletar</Button>
                     </Stack>
                 </Row>
             </Container>

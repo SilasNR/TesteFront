@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import { Modal, Form } from 'react-bootstrap';
+import { Modal, Form, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 import Lista from '../../Lista/Lista.js';
@@ -24,9 +24,6 @@ function Cadastrar(param) {
       setLista(param.pedido.lista || []);
       console.log("Lista recebida:", param.pedido.lista);
     }
-
-
-
   }, [param.pedido]);
 
   useEffect(() => {
@@ -39,15 +36,6 @@ function Cadastrar(param) {
       setQuantidade('');
     }
   }, [param.show]);
-  
-  const adicionarProd = () => {
-    const prodLista = {
-      codigoProduto: codigo,
-      quantidade: quantidade
-    };
-
-    setLista([...lista, prodLista]);
-  };
 
   const limpar = () => {
     param.onHide();
@@ -57,6 +45,15 @@ function Cadastrar(param) {
     setQuantidade("");
     setLista([]);
   }
+
+  const adicionarProd = () => {
+    const prodLista = {
+      codigoProduto: codigo,
+      quantidade: quantidade
+    };
+
+    setLista([...lista, prodLista]);
+  };
 
   const salvar = () => {
     const pedido = {
@@ -73,7 +70,6 @@ function Cadastrar(param) {
         // tratar erro
         console.error(err);
       });
-
   }
 
   const [titulos] = useState([
@@ -81,11 +77,13 @@ function Cadastrar(param) {
     "Código",
     "Quantidade"
   ]);
+  
   const [campos] = useState([
     "",
     "codigoProduto",
     "quantidade"
   ]);
+
   return (
     <Modal
       {...param}
@@ -107,10 +105,19 @@ function Cadastrar(param) {
           <Form.Label>Cliente:</Form.Label>
           <Form.Control type="text" placeholder="Nome do Cliente" value={cliente} onChange={(e) => setCliente(e.target.value)} />
         </Form.Group>
-        <Form.Group className="mb-3 d-flex align-items-center gap-2" controlId="form">
+        <Form.Group  className="mb-3 d-flex align-items-center gap-2" controlId="form">
           <Form.Label>Produtos:</Form.Label>
-          <Form.Control type="text" placeholder="Código do produto" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
-          <Form.Control type="text" placeholder="Código do produto" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
+          <Form.Group  controlId="formGridCodigo">
+            <Form.Label>Código </Form.Label>
+            <Form.Select aria-label="Default select example" value={codigo} onChange={(e) => { param.selecionado(e); setCodigo(e.target.value); }}>
+              <option value="-1">...</option>
+              {param.produtos.map((value, index) => (
+                <option key={index} value={index} >
+                  {value.codigo}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
           <Button onClick={() => {
             adicionarProd();
             setCodigo("");

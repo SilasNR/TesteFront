@@ -1,4 +1,4 @@
-import Lista from "../Lista/Lista.js"
+import Lista from "./Lista/Lista.js"
 import { useEffect, useState } from 'react';
 import { getProdutos } from '../../../../service/produto.service.js';
 import Filtro from '../Filto/Filtro.js';
@@ -43,16 +43,16 @@ function Estoque() {
 
     const [titulos] = useState([
         "Código",
-        "Observação",
-        "Peças",
-        "Caixas"
+        "Estoque Frente",
+        "Estoque Fundo",
+        "Total de Peças"
     ]);
 
     const [campos] = useState([
         "codigo",
-        "observacao",
         "quantidade",
-        "quantidade"
+        "caixa",
+        "total"
     ]);
 
     const aoClicar = () => {
