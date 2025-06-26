@@ -1,8 +1,9 @@
+import '../../../Principal.css'
 import Button from 'react-bootstrap/Button';
-import { Modal, Form, Col } from 'react-bootstrap';
+import { Modal, Form, Col, Row, Container, Stack } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
-import Lista from '../../Lista/Lista.js';
+import Lista from './Lista/Lista.js';
 
 import { createPedido } from '../../../../../service/pedido.service.js';
 
@@ -15,6 +16,7 @@ function Cadastrar(param) {
 
   const [lista, setLista] = useState([]);
 
+  const [prodSelect, setProdSelect] = useState([]);
 
   useEffect(() => {
     if (param.pedido) {
@@ -46,13 +48,24 @@ function Cadastrar(param) {
     setLista([]);
   }
 
+  const selecionado = (e) => {////////////////////////////Pega as imformações do produto selecionado no espaço Dados do Produto
+    const index = parseInt(e.target.value, 10); // Converte para número
+    const produto = param.produtos[index];
+    console.log(produto);
+    setProdSelect(produto);
+  }
+
   const adicionarProd = () => {
-    const prodLista = {
-      codigoProduto: codigo,
+    const proximoProduto = {
+      codigo: prodSelect.codigo,
       quantidade: quantidade
     };
 
-    setLista([...lista, prodLista]);
+    console.log("Código = ", proximoProduto);
+
+    setLista([...lista, proximoProduto]);
+    console.log(lista);
+
   };
 
   const salvar = () => {
@@ -61,6 +74,8 @@ function Cadastrar(param) {
       cliente: cliente,
       produtos: lista
     }
+
+    console.log(pedido);
 
     createPedido(pedido).then(resultado => {
       console.log('Pedido criado:', resultado);
@@ -77,10 +92,10 @@ function Cadastrar(param) {
     "Código",
     "Quantidade"
   ]);
-  
+
   const [campos] = useState([
     "",
-    "codigoProduto",
+    "codigo",
     "quantidade"
   ]);
 
@@ -97,39 +112,56 @@ function Cadastrar(param) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Group className="mb-3 " controlId="formNumeroPedido">
-          <Form.Label>Numero do pedido:</Form.Label>
-          <Form.Control type="text" placeholder="N° Pedido" value={numeroPedido} onChange={(e) => setNumeroPedido(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
-          <Form.Label>Cliente:</Form.Label>
-          <Form.Control type="text" placeholder="Nome do Cliente" value={cliente} onChange={(e) => setCliente(e.target.value)} />
-        </Form.Group>
-        <Form.Group  className="mb-3 d-flex align-items-center gap-2" controlId="form">
-          <Form.Label>Produtos:</Form.Label>
-          <Form.Group  controlId="formGridCodigo">
-            <Form.Label>Código </Form.Label>
-            <Form.Select aria-label="Default select example" value={codigo} onChange={(e) => { param.selecionado(e); setCodigo(e.target.value); }}>
-              <option value="-1">...</option>
-              {param.produtos.map((value, index) => (
-                <option key={index} value={index} >
-                  {value.codigo}</option>
-              ))}
-            </Form.Select>
+        <Col className='separador mb-3'>
+          <Form.Group className="mb-3 " controlId="formNumeroPedido">
+            <Form.Label>Numero do pedido:</Form.Label>
+            <Form.Control type="text" placeholder="N° Pedido" value={numeroPedido} onChange={(e) => setNumeroPedido(e.target.value)} />
           </Form.Group>
-          <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
-          <Button onClick={() => {
-            adicionarProd();
-            setCodigo("");
-            setQuantidade("");
-          }}>+</Button>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formLista">
-          <Lista titulos={titulos} campos={campos} valores={lista} resposta="Nenhum Produto" />
+          <Form.Group className="mb-3" controlId="formCliente">
+            <Form.Label>Cliente:</Form.Label>
+            <Form.Control type="text" placeholder="Nome do Cliente" value={cliente} onChange={(e) => setCliente(e.target.value)} />
+          </Form.Group>
+        </Col>
+
+
+        <Col className='separador'>
+          <Form.Group className="gap-2" controlId="form">
+            <Row>
+              <Form.Label>Produtos:</Form.Label>
+            </Row>
+
+            <Row>
+              <Form.Label>Código: </Form.Label>
+            </Row>
+            
+            <Row>
+              <Stack gap={2}>
+                <Form.Select aria-label="Default select example" value={codigo} onChange={(e) => { selecionado(e); setCodigo(e.target.value); }}>
+                  <option value="-1">...</option>
+                  {param.produtos.map((value, index) => (
+                    <option key={index} value={index} >
+                      {value.codigo}</option>
+                  ))}
+                </Form.Select>
+
+                <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
+                <Button onClick={() => {
+                  adicionarProd();
+                  setCodigo("");
+                  setQuantidade("");
+                }}>+</Button>
+              </Stack>
+            </Row>
+          </Form.Group>
+        </Col>
+
+
+        <Form.Group className="mt-4 justify-content-md-center" controlId="formLista">
+          <Lista titulos={titulos} campos={campos} valores={lista} resposta="Nenhum produto adicionado" />
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-
+        <Button onClick={() => { limpar() }}><i class="bi bi-trash3"></i> Excluir</Button>
         <Button onClick={() => { limpar() }}>Close</Button>
         <Button onClick={() => {
           salvar();

@@ -84,11 +84,7 @@ function Pedido() {
         buscarAteEncontrar();
     }, []);
 
-    const selecionado = (e) => {////////////////////////////Pega as imformações do produto selecionado no espaço Dados do Produto
-        const index = parseInt(e.target.value, 10); // Converte para número
-        const produto = produtos[index];
-        console.log(produto);
-    }
+
 
     return (
         <Col>
@@ -101,7 +97,6 @@ function Pedido() {
                 pedido={pedido}
                 alterar={alterar}
                 produtos={produtos}
-                selecionado={selecionado}
             />
         </Col>
     )

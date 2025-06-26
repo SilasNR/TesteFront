@@ -157,18 +157,18 @@ function Produtos() {
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade Total</Form.Label>
-                                    <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade do Pacote:</Form.Label>
+                                    <Form.Label>Quantidade de peças por Pacote:</Form.Label>
                                     <Form.Control type="text" placeholder="Pacote" value={pacote} onChange={(e) => setPacote(e.target.value)} />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade da Caixa:</Form.Label>
+                                    <Form.Label>Quantidade de peças por Caixa:</Form.Label>
                                     <Form.Control type="text" placeholder="Caixa" value={caixa} onChange={(e) => setCaixa(e.target.value)} />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                    <Form.Label>Quantidade Total</Form.Label>
+                                    <Form.Control type="text" placeholder="Quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
                                 </Form.Group>
                             </Row>
                         </Form>
@@ -207,18 +207,18 @@ function Produtos() {
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade Total</Form.Label>
-                                    <Form.Control type="text" placeholder="Quantidade" value={altQuantidade} onChange={(e) => setAltQuantidade(e.target.value)} />
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade do Pacote:</Form.Label>
+                                    <Form.Label>Quantidade de peças por pacote:</Form.Label>
                                     <Form.Control type="text" placeholder="Pacote" value={altPacote} onChange={(e) => setAltPacote(e.target.value)} />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridQuantidade">
-                                    <Form.Label>Quantidade da Caixa:</Form.Label>
+                                    <Form.Label>Quantidade de peças por Caixa:</Form.Label>
                                     <Form.Control type="text" placeholder="Caixa" value={altCaixa} onChange={(e) => setAltCaixa(e.target.value)} />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col} controlId="formGridQuantidade">
+                                    <Form.Label>Quantidade Total</Form.Label>
+                                    <Form.Control type="text" placeholder="Quantidade" value={altQuantidade} onChange={(e) => setAltQuantidade(e.target.value)} />
                                 </Form.Group>
                             </Row>
                         </Form>
