@@ -6,40 +6,29 @@ import Filtro from '../Filto/Filtro.js';
 function Estoque() {
     const [produtos, setProdutos] = useState([]);
 
-    //////////////////////////////////////////////////////// Buscar produtos
-    // const busacarProdutos = async () => {
-    //     const data = await getProdutos();
-    //     if (Array.isArray(data)) {
-    //         setProdutos(data);
-    //         console.log("buscando ...");
+    const buscarAteEncontrar = async () => {////////////////////////////////////////////////////////////////Busca produtos no banco
+        let encontrado = false;
+        let tentativas = 0;
+        const maxTentativas = 3;
+        while (!encontrado && tentativas < maxTentativas) {
+            tentativas++;
+            const data = await getProdutos();
+            if (Array.isArray(data) && data.length > 0) {
+                setProdutos(data);
+                console.log(produtos);
 
-    //     } else {
-    //         setProdutos([]);
-    //         console.log("não encontrado ...");
-
-    //     }
-    // };
+                console.log("Encontrado");
+                encontrado = true;
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // espera 2 segundos 
+                console.log("Buscando produto...");
+            }
+        }
+    };
 
     useEffect(() => {
-        const buscarAteEncontrar = async () => {
-            let encontrado = false;
-
-            while (!encontrado) {
-                const data = await getProdutos();
-
-                if (Array.isArray(data) && data.length > 0) {
-                    setProdutos(data);
-                    console.log("Encontrado");
-                    encontrado = true;
-                } else {
-                    console.log("Buscando...");
-                    await new Promise(resolve => setTimeout(resolve, 2000)); // espera 2 segundos 
-                }
-            }
-        };
-
         buscarAteEncontrar();
-    }, []);
+    });
 
     const [titulos] = useState([
         "Código",

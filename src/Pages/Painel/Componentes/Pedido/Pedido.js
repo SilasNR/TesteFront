@@ -18,7 +18,7 @@ function Pedido() {
     const busacarAteEncontrar = async () => { /////////////////////////////////////Busca os Pedidos
         let encontrado = false;
         let tentativas = 0;
-        const maxTentativas = 5;
+        const maxTentativas = 3;
         while (!encontrado && tentativas < maxTentativas) {
             tentativas++;
             const data = await getPedidos();
@@ -31,7 +31,7 @@ function Pedido() {
             }
         }
         if (tentativas === 5) {
-            setResposta("Nada");
+            setResposta("Nenhum pedido encontrado");
         }
     }
     useEffect(() => {
@@ -63,7 +63,7 @@ function Pedido() {
     const buscarAteEncontrar = async () => {////////////////////////////////////////////////////////////////Busca produtos no banco
         let encontrado = false;
         let tentativas = 0;
-        const maxTentativas = 5;
+        const maxTentativas = 3;
         while (!encontrado && tentativas < maxTentativas) {
             tentativas++;
             const data = await getProdutos();
@@ -75,7 +75,7 @@ function Pedido() {
                 encontrado = true;
             } else {
                 await new Promise(resolve => setTimeout(resolve, 2000)); // espera 2 segundos 
-                console.log("Buscando...");
+                console.log("Buscando Produtos...");
             }
         }
     };

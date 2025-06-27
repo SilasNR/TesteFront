@@ -18,7 +18,7 @@ function Produtos() {
     const buscarAteEncontrar = async () => {////////////////////////////////////////////////////////////////Busca produtos no banco
         let encontrado = false;
         let tentativas = 0;
-        const maxTentativas = 5;
+        const maxTentativas = 3;
         while (!encontrado && tentativas < maxTentativas) {
             tentativas++;
             const data = await getProdutos();
@@ -30,7 +30,7 @@ function Produtos() {
                 encontrado = true;
             } else {
                 await new Promise(resolve => setTimeout(resolve, 2000)); // espera 2 segundos 
-                console.log("Buscando...");
+                console.log("Buscando produtos...");
             }
         }
     };

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import Lista from './Lista/Lista.js';
 
-import { createPedido } from '../../../../../service/pedido.service.js';
+import { createPedido, deletePedido } from '../../../../../service/pedido.service.js';
 
 function Cadastrar(param) {
 
@@ -87,6 +87,19 @@ function Cadastrar(param) {
       });
   }
 
+  const deletar = () => {
+    console.log(param.pedido.id);
+    
+    deletePedido(param.pedido.id).then(resultado => {
+      console.log('Pedido deletado:', resultado);
+      param.buscar();
+    })
+      .catch(err => {
+        // tratar erro
+        console.error(err);
+      });
+  }
+
   const [titulos] = useState([
     "",
     "Código",
@@ -161,7 +174,7 @@ function Cadastrar(param) {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => { limpar() }}><i class="bi bi-trash3"></i> Excluir</Button>
+        <Button onClick={() => { deletar()}}><i class="bi bi-trash3"></i> Excluir</Button>
         <Button onClick={() => { limpar() }}>Close</Button>
         <Button onClick={() => {
           salvar();
