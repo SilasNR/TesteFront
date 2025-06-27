@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { getPedidos } from '../../../../service/pedido.service';
-
+import { getProdutos } from '../../../../service/produto.service.js';
 import Filtro from '../Filto/Filtro.js';
 import Lista from '../Lista/Lista.js';
 import CadPedido from './Cadastro/Cadastrar.js'
@@ -15,7 +15,7 @@ function Pedido() {
     const [pedidos, setPedidos] = useState([]);
     const [resposta, setResposta] = useState("");
 
-    const busacarAteEncontrar = async () => {
+    const busacarAteEncontrar = async () => { /////////////////////////////////////Busca os Pedidos
         let encontrado = false;
         let tentativas = 0;
         const maxTentativas = 5;
@@ -39,13 +39,11 @@ function Pedido() {
     }, []);
 
     const [titulos] = useState([
-
         "Numero",
         "Cliente"
     ]);
 
     const [campos] = useState([
-
         "numero",
         "cliente"
     ]);
@@ -60,9 +58,37 @@ function Pedido() {
         mudarModal();
     }
 
+    const [produtos, setProdutos] = useState([]);
+
+    const buscarAteEncontrar = async () => {////////////////////////////////////////////////////////////////Busca produtos no banco
+        let encontrado = false;
+        let tentativas = 0;
+        const maxTentativas = 5;
+        while (!encontrado && tentativas < maxTentativas) {
+            tentativas++;
+            const data = await getProdutos();
+            if (Array.isArray(data) && data.length > 0) {
+                setProdutos(data);
+                console.log(produtos);
+
+                console.log("Encontrado");
+                encontrado = true;
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // espera 2 segundos 
+                console.log("Buscando...");
+            }
+        }
+    };
+
+    useEffect(() => {////////////////////////////////////////////////////////////////Busca produtos no banco
+        buscarAteEncontrar();
+    }, []);
+
+
+
     return (
         <Col>
-            <Filtro mudarModal={mudarModal} tela="pedido"/>
+            <Filtro mudarModal={mudarModal} tela="pedido" />
             <Lista valores={pedidos} titulos={titulos} campos={campos} resposta={resposta} funcao="sim" aoClicar={abrirPedido} />
             <CadPedido
                 show={modalShow}
@@ -70,6 +96,7 @@ function Pedido() {
                 buscar={busacarAteEncontrar}
                 pedido={pedido}
                 alterar={alterar}
+                produtos={produtos}
             />
         </Col>
     )

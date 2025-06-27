@@ -11,6 +11,7 @@ function Filtro(param) {
             <Row className='barra m-0 mb-2 d-flex align-items-center' >
                 <Col className="d-flex align-items-center gap-2">
                     <span> Filtro: </span><Form.Control className="txt" type="text" placeholder="numero, cliente" />
+                    <i class="bi bi-arrow-clockwise"></i>
                 </Col>
                 <Col xs lg="2">
                     {param.tela === "produto" ?
