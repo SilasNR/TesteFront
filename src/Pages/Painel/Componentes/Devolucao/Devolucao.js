@@ -1,15 +1,14 @@
-import Lista from '../Lista/Lista.js'
-import { useState } from 'react';
-
+import Lista from "../Lista/Lista.js";
+import { useState } from "react";
 
 function Devolucao() {
-    const [v, setV] = useState([]);
+  const [v] = useState([]);
 
-    return (
-        <>
-            <Lista resposta="" valores={v}/>
-        </>
-    )
+  return (
+    <>
+      <Lista resposta="" valores={v} />
+    </>
+  );
 }
 
 export default Devolucao;
