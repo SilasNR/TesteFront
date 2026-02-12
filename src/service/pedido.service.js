@@ -1,9 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 //http://localhost:3001/
 //const API_URL = 'https://backend-basico-production-b95f.up.railway.app/';
-const URL2 = "https://backend-basico-production-b95f.up.railway.app/pedidos";
-
+const URL2 = "controle-pedido-apoio-2238.i.aivencloud.com/pedidos";
 
 /////////////////////////////////////////////////////////////////////// Get Pedidos
 export const getPedidos = async () => {
@@ -12,7 +11,7 @@ export const getPedidos = async () => {
     return response.data;
   } catch (error) {
     console.log("Nada Encontrado");
-    
+
     return []; // 👈 evita erro no .map() se algo der errado
   }
 };
@@ -20,26 +19,23 @@ export const getPedidos = async () => {
 /////////////////////////////////////////////////////////////////////// Post Pedido
 export const createPedido = async (pedido) => {
   try {
-    const response = await fetch(
-      `${URL2}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(pedido),
-      }
-    );
+    const response = await fetch(`${URL2}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pedido),
+    });
 
     if (!response.ok) {
       throw new Error(`Erro: ${response.status}`);
     }
 
     const resultado = await response.json();
-    console.log('Pedido cadastrado:', resultado);
+    console.log("Pedido cadastrado:", resultado);
     return resultado;
   } catch (err) {
-    console.error('Erro ao enviar Pedido: ', err);
+    console.error("Erro ao enviar Pedido: ", err);
     throw err;
   }
 };
@@ -63,8 +59,7 @@ export const deletePedidos = async (ids) => {
     const response = await axios.post(`${URL2}/delete-many`, ids);
     return response.data;
   } catch (error) {
-    console.error('Erro ao deletar Pedidos', error);
+    console.error("Erro ao deletar Pedidos", error);
     throw error;
   }
 };
-
