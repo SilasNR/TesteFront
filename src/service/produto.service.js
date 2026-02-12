@@ -2,7 +2,7 @@ import axios from "axios";
 
 //http://localhost:3001/produtos
 //const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
-const URL2 = "controle-pedido-apoio-2238.i.aivencloud.com/produtos";
+const URL2 = "https://backend-basico.onrender.com/produtos";
 
 /////////////////////////////////////////////////////////////////////// Get Produtos
 export const getProdutos = async () => {
