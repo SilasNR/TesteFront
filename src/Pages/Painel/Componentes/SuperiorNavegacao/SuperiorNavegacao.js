@@ -1,5 +1,5 @@
 import "./SuperiorNavegacao.css";
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 
 function SuperiorNavegacao() {
@@ -9,15 +9,24 @@ function SuperiorNavegacao() {
     const ultimo = partes.pop() || partes.pop();
 
     return (
-        <>
+        <Container fluid>
             <Row className="TodosSupBtn">
-                <Col className={ultimo === "Estoque" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Estoque" className={ultimo === "Estoque" ? "ativo" : ""}><h1>Estoque</h1></Link></Col>
-                <Col className={ultimo === "Pedido" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Pedido"className={ultimo === "Pedido" ? "ativo" : ""}><h1>Pedidos</h1></Link></Col>
-                <Col className={ultimo === "Danificado" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Danificado" className={ultimo === "Danificado" ? "ativo" : ""}><h1>Danificados</h1></Link></Col>
-                <Col className={ultimo === "Devolucao" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Devolucao" className={ultimo === "Devolucao" ? "ativo" : ""}><h1>Devoluções</h1></Link></Col>
-                <Col className={ultimo === "Produto" ? "SupBtn ativo" : "SupBtn"}><Link to="/Painel/Produto" className={ultimo === "Produto" ? "ativo" : ""}><h1>Produto</h1></Link></Col>
+                <Link to="/Painel/Estoque"><Col className={ultimo === "Estoque" ? "SupBtn ativo" : "SupBtn"}><span>Estoque</span></Col></Link>
+                <Link to="/Painel/Pedido" ><Col className={ultimo === "Pedido" ? "SupBtn ativo" : "SupBtn"}><span>Pedidos</span></Col></Link>
+                <Link to="/Painel/Danificado" ><Col className={ultimo === "Danificado" ? "SupBtn ativo" : "SupBtn"}><span>Danificados</span></Col></Link>
+                <Link to="/Painel/Devolucao" ><Col className={ultimo === "Devolucao" ? "SupBtn ativo" : "SupBtn"}><span>Devoluções</span></Col></Link>
+                <Link to="/Painel/Produto" ><Col className={ultimo === "Produto" ? "SupBtn ativo" : "SupBtn"}><span>Produto</span></Col></Link>
+                <Link to="/Painel/Frete" ><Col className={ultimo === "Fretes" ? "SupBtn ativo" : "SupBtn"}><span>Fretes</span></Col></Link>
+                <Col md={1}>
+                    <Row>
+                        <Link to="/Painel/Configuracoes"><Col className={ultimo === "Configuracoes" ? "HelpBtn ativo" : "HelpBtn"}><span className={ultimo === "Configuracoes" ? "ativo" : ""}><i class="bi bi-gear"></i></span></Col></Link>
+                    </Row>
+                    <Row>
+                        <Col className={ultimo === "Ajuda" ? "HelpBtn ativo" : "HelpBtn"}><Link to="/Painel/Ajuda" className={ultimo === "Ajuda" ? "ativo" : ""}><span><i class="bi bi-question-lg"></i></span></Link></Col>
+                    </Row>
+                </Col>
             </Row>
-        </>
+        </Container>
     )
 }
 

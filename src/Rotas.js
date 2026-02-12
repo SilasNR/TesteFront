@@ -42,6 +42,18 @@ const Rotas = createBrowserRouter([
           path: "/Painel/Produto",
           element: <Produtos />,
         },
+        {
+          path: "/Painel/Frete",
+          element: <Produtos />,
+        },
+        {
+          path: "/Painel/Configuracoes",
+          element: <Produtos />,
+        },
+        {
+          path: "/Painel/Ajuda",
+          element: <Produtos />,
+        },
       ]
   },
 ]);
