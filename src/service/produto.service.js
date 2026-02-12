@@ -1,61 +1,61 @@
 import axios from "axios";
 
-//http://localhost:3001/produtos
-//const API_URL = 'https://backend-basico-production-b95f.up.railway.app/produtos';
-const URL2 = "https://backend-basico.onrender.com/produtos";
+// URL do seu backend no Render
+const URL = "https://backend-basico.onrender.com/produtos";
+
+// Instância do Axios (opcional, mas boa prática para definir o timeout e headers)
+const api = axios.create({
+  baseURL: URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 /////////////////////////////////////////////////////////////////////// Get Produtos
 export const getProdutos = async () => {
   try {
-    const response = await axios.get(URL2);
+    const response = await api.get("/"); // O "/" aqui se junta à baseURL
     return response.data;
   } catch (error) {
-    return []; // 👈 evita erro no .map() se algo der errado
+    console.error("Erro ao buscar produtos:", error.message);
+    return [];
   }
 };
 
 /////////////////////////////////////////////////////////////////////// Post Produto
 export const createProduto = async (produto) => {
   try {
-    const response = await fetch(`${URL2}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(produto),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Erro: ${response.status}`);
-    }
-
-    const resultado = await response.json();
-    console.log("Produto cadastrado:", resultado);
-    return resultado;
+    // Trocado Fetch por Axios para manter o padrão
+    const response = await api.post("/", produto);
+    console.log("Produto cadastrado:", response.data);
+    return response.data;
   } catch (err) {
-    console.error("Erro ao enviar produto: ", err);
+    console.error(
+      "Erro ao enviar produto: ",
+      err.response?.data || err.message
+    );
     throw err;
   }
 };
 
-////////////////////////////////////////////////////////////////////////////////Delete Produto
+//////////////////////////////////////////////////////////////////////////////// Delete Produto
 export const deleteProduto = async (id) => {
   try {
-    const response = await axios.delete(`${URL2}/${id}`);
+    const response = await api.delete(`/${id}`);
     return response.data;
   } catch (error) {
-    console.error("Erro ao deletar produto", error);
+    console.error("Erro ao deletar produto:", error.message);
     throw error;
   }
 };
 
-//////////////////////////////////////////////////////////////////////////////// Delete Produtos (Post)
+//////////////////////////////////////////////////////////////////////////////// Delete Vários
 export const deleteProdutos = async (ids) => {
   try {
-    const response = await axios.post(`${URL2}/delete-many`, ids);
+    const response = await api.post("/delete-many", { ids }); // Enviando como objeto { ids: [...] }
     return response.data;
   } catch (error) {
-    console.error("Erro ao deletar produtos", error);
+    console.error("Erro ao deletar produtos:", error.message);
     throw error;
   }
 };
