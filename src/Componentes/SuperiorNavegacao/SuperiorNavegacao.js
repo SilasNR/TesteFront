@@ -1,15 +1,15 @@
 import "./SuperiorNavegacao.css";
 import { Container } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 function SuperiorNavegacao() {
-  const location = useLocation();
-  const path = location.pathname;
-  const partes = path.split("/");
-  const ultimo = partes.pop() || partes.pop();
+  //const location = useLocation();
+  //const path = location.pathname;
+  //const partes = path.split("/");
+  //const ultimo = partes.pop() || partes.pop();
 
   return (
     <Container fluid className="ps-0">
