@@ -1,0 +1,53 @@
+/* Container de Filtros externo */
+.Form {
+  background-color: rgb(160, 190, 216);
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Cabeçalho */
+.titulos {
+  background-color: rgb(0, 81, 148);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px 10px 0px 0px;
+  border: 1px solid black;
+}
+
+/* Corpo com Scroll */
+.lista-scroll {
+  overflow-y: auto;
+  overflow-x: hidden; /* Mata o scroll horizontal */
+  max-height: 650px;
+  background-color: white;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.linha {
+  transition: background-color 0.2s ease;
+  min-height: 45px;
+}
+
+.linha:hover {
+  background-color: rgb(197, 231, 245);
+  cursor: pointer;
+}
+
+.celula {
+  /* Removemos o border: 1px solid em tudo para não somar pixels extras na largura */
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.celula:last-child {
+  border-right: none;
+}
+
+.celula p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Se o texto for grande, ele coloca ... e não quebra a tela */
+}

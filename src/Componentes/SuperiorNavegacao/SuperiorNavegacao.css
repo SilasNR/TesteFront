@@ -1,0 +1,47 @@
+.HelpBtn {
+  font-size: 21px;
+  border: 1px solid rgb(0, 81, 148);
+  text-align: center;
+}
+
+.HelpBtn:hover {
+  background-color: rgb(73, 137, 189);
+  color: white;
+}
+
+.TodosSupBtn {
+  margin-bottom: 10px;
+}
+
+.ativo {
+  background-color: rgb(0, 81, 148);
+  color: white;
+}
+
+.SupBtn {
+  border: 1px solid rgb(0, 81, 148);
+  text-align: center;
+}
+
+.SupBtn:hover {
+  background-color: rgb(73, 137, 189);
+  /*color: white;*/
+}
+
+a {
+  color: rgb(0, 81, 148);
+  /* cor padrão */
+  text-decoration: none;
+  padding: 0px;
+}
+
+/* a:hover {
+  color: rgb(255, 255, 255);
+  /* cor padrão 
+  text-decoration: none;
+} */
+
+/* a.ativo {
+  color: rgb(255, 255, 255);
+  /* quando ativo 
+} */

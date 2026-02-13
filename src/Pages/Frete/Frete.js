@@ -1,12 +1,12 @@
 import { Row, Col, Container } from "react-bootstrap";
 
-function Ajuda() {
+function Frete() {
   return (
     <>
-      <Container fluid className="h-100">
+      <Container fluid className="vh-100">
         <Row className="px-0">
           <Col>
-            <h1>Ajuda</h1>
+            <h1>Frete</h1>
           </Col>
         </Row>
       </Container>
@@ -14,4 +14,4 @@ function Ajuda() {
   );
 }
 
-export default Ajuda;
+export default Frete;

@@ -1,0 +1,17 @@
+.barra {
+  background-color: rgb(0, 81, 148);
+  color: white;
+  font-size: 20px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.excluir {
+  background-color: red;
+  color: white;
+}
+
+.novo {
+  background-color: green;
+  color: white;
+}
