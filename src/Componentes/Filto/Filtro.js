@@ -54,13 +54,16 @@ function Filtro(param) {
             //         <Dropdown.Item href="#/action-2"><i class="bi bi-pencil-fill">  Alterar</i>   </Dropdown.Item>
             //     </Dropdown.Menu> */}
             // </Dropdown>
-            <Button
-              onClick={() => {
-                param.mudarModal();
-              }}
-            >
-              Criar Pedido
-            </Button>
+            <Row>
+              <Button
+                onClick={() => {
+                  param.mudarModal();
+                }}
+              >
+                Criar Pedido
+              </Button>
+              <Button href="/Painel/Cadastro_Pedido">Criar</Button>
+            </Row>
           ) : param.tela === "danificados" ? (
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">

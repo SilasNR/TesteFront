@@ -6,6 +6,7 @@ import Login from "./Pages/Login/Login.js";
 /*--------------------------Conteudo ---->*/
 import Estoque from "./Pages/Estoque/Estoque.js";
 import Pedido from "./Pages/Pedido/Pedido.js";
+import Cadastro_Pedido from "./Pages/Pedido/Cadastro/Cadastro_Pedido.js";
 import Danificado from "./Pages/Danificado/Danificado.js";
 import Devolucao from "./Pages/Devolucao/Devolucao.js";
 import Produtos from "./Pages/Produtos/Produtos.js";
@@ -29,6 +30,10 @@ const Rotas = createBrowserRouter([
       {
         path: "/Painel/Pedido",
         element: <Pedido />,
+      },
+      {
+        path: "/Painel/Cadastro_Pedido",
+        element: <Cadastro_Pedido />,
       },
       {
         path: "/Painel/Danificado",
