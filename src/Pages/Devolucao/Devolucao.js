@@ -1,4 +1,4 @@
-import Lista from "../Painel/Componentes/Lista/Lista.js";
+import Lista from "../../Componentes/Lista/Lista.js";
 import { useState } from "react";
 
 function Devolucao() {
