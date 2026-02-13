@@ -1,0 +1,66 @@
+/* Container de filtros (se você usar essa classe no topo) */
+.Form {
+  background-color: rgb(160, 190, 216);
+  padding: 10px 20px; /* Reduzi para não apertar em telas menores */
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* O cabeçalho da tabela */
+.titulos {
+  background-color: rgb(0, 81, 148);
+  color: white;
+  font-size: 1.1rem; /* Usar rem é melhor para acessibilidade */
+  font-weight: bold;
+  margin: 0 !important; /* Removemos a margem lateral que causava o vazamento */
+  width: 100%; /* Ocupa o container pai totalmente */
+  border-radius: 10px 10px 0px 0px;
+  border: 1px solid black;
+  border-bottom: none;
+}
+
+/* O corpo da lista com scroll */
+.lista-scroll {
+  overflow-y: auto;
+  overflow-x: hidden; /* Segurança total contra scroll horizontal */
+  max-height: 650px;
+  margin: 0 !important;
+  border: 1px solid black;
+  border-radius: 0px 0px 10px 10px;
+  background-color: white;
+}
+
+/* Estilo de cada linha */
+.linha {
+  margin: 0 !important;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #dee2e6; /* Linha sutil entre itens */
+}
+
+.linha:hover {
+  background-color: rgb(197, 231, 245);
+  cursor: pointer;
+}
+
+/* Ajuste das células */
+.celula {
+  border-right: 1px solid black; /* Borda apenas na direita para separar colunas */
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center; /* Alinha o texto verticalmente ao centro */
+}
+
+.celula:last-child {
+  border-right: none; /* Remove a borda da última coluna */
+}
+
+/* Forçar o texto a não quebrar e não esticar a tela */
+.celula span,
+.celula p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}

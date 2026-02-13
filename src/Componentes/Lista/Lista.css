@@ -1,0 +1,22 @@
+.Form {
+  background-color: rgb(160, 190, 216);
+}
+
+.lista {
+  overflow-y: auto;
+  max-height: 650px;
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid --bs-primary-rgb;
+}
+
+.linha:hover {
+  background-color: rgb(197, 231, 245);
+  cursor: pointer;
+}
+
+.titulos {
+  background-color: rgb(0, 81, 148);
+  color: white;
+  font-size: 10px;
+  border-radius: 10px 10px 0px 0px;
+}
