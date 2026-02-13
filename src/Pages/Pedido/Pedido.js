@@ -15,7 +15,16 @@ function Pedido() {
   const [isAlterar, setIsAlterar] = useState(false);
 
   // Configuração fixa da tabela (não precisa ser estado se não muda)
-  const titulos = ["Número", "Cliente"];
+  const titulos = [
+    "Número",
+    "Cliente",
+    "CNPJ",
+    "Cidade - UF",
+    "Volume",
+    "Transportadora",
+    "Frete",
+    "Finalizado",
+  ];
   const campos = ["numero", "cliente"];
 
   // Abrir para criação

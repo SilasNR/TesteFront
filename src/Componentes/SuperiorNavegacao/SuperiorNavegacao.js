@@ -26,12 +26,12 @@ function SuperiorNavegacao() {
 
           {/* Navegação Principal */}
           <Nav className="flex-column w-100">
-            <Nav.Link href="/Painel/Estoque">Estoque</Nav.Link>
             <Nav.Link href="/Painel/Pedido">Pedido</Nav.Link>
             <Nav.Link href="/Painel/Danificado">Danificados</Nav.Link>
             <Nav.Link href="/Painel/Devolucao">Devoluções</Nav.Link>
             <Nav.Link href="/Painel/Produto">Produto</Nav.Link>
             <Nav.Link href="/Painel/Frete">Fretes</Nav.Link>
+            <Nav.Link href="/Painel/Estoque">Estoque</Nav.Link>
           </Nav>
 
           {/* Bloco Inferior: O mt-auto empurra tudo abaixo dele para o fim do container */}
