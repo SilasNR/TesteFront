@@ -20,7 +20,7 @@ function SuperiorNavegacao() {
         style={{ width: "250px" }}
       >
         <Container className="flex-column h-100 align-items-start">
-          <Navbar.Brand href="#home" className="mb-4">
+          <Navbar.Brand href="/Painel/Home" className="mb-4">
             Logo
           </Navbar.Brand>
 

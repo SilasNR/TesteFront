@@ -1,4 +1,5 @@
-import { Row, Col, Form, Dropdown, Button, Container } from "react-bootstrap";
+import { Row, Col, Form, Dropdown, Container } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
 import "../../Pages/Principal/Principal.css";
 import "./Filtro.css";
 
@@ -39,7 +40,7 @@ function Filtro(param) {
                                 </Dropdown.Item> */}
               </Dropdown.Menu>
             </Dropdown>
-          ) : param.tela != "produto" ? (
+          ) : param.tela !== "produto" ? (
             // <Dropdown>
             //     <Dropdown.Toggle variant="success" id="dropdown-basic">
             //         <i class="bi bi-tools"></i>
@@ -54,13 +55,14 @@ function Filtro(param) {
             //         <Dropdown.Item href="#/action-2"><i class="bi bi-pencil-fill">  Alterar</i>   </Dropdown.Item>
             //     </Dropdown.Menu> */}
             // </Dropdown>
-            <Button
+            <Nav.Link
+              href={param.link}
               onClick={() => {
                 param.mudarModal();
               }}
             >
               Novo {param.tela}
-            </Button>
+            </Nav.Link>
           ) : param.tela === "danificados" ? (
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">

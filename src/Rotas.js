@@ -9,7 +9,10 @@ import Estoque from "./Pages/Estoque/Estoque.js";
 import Pedido from "./Pages/Pedido/Pedido.js";
 import Danificado from "./Pages/Danificado/Danificado.js";
 import Devolucao from "./Pages/Devolucao/Devolucao.js";
+
 import Produtos from "./Pages/Produtos/Produtos.js";
+import CadastroProd from "./Pages/Produtos/Cadastro/Cadastro.js";
+
 import Frete from "./Pages/Frete/Frete.js";
 import Configuracoes from "./Pages/Configuracoes/Configuracoes.js";
 import Ajuda from "./Pages/Ajuda/Ajuda.js";
@@ -46,6 +49,12 @@ const Rotas = createBrowserRouter([
       {
         path: "/Painel/Produto",
         element: <Produtos />,
+        children: [
+          {
+            path: "/Painel/Produto/CadastroProd",
+            element: <CadastroProd />,
+          },
+        ],
       },
       {
         path: "/Painel/Frete",
