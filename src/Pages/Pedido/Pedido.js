@@ -72,7 +72,7 @@ function Pedido() {
   return (
     <Col className="p-0">
       {/* Passamos handleNovoPedido em vez de apenas abrir o modal */}
-      <Filtro mudarModal={handleNovoPedido} tela="pedido" />
+      <Filtro mudarModal={handleNovoPedido} tela="Pedido" />
 
       <Lista
         valores={pedidos}

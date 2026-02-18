@@ -1,6 +1,8 @@
 import { Row, Col, Container, Form, Button, Stack } from "react-bootstrap";
 import { useState, useEffect, useCallback } from "react";
 import "./Produtos.css";
+import Lista from "./Lista/Lista.js";
+import Filtro from "../../Componentes/Filto/Filtro.js";
 
 import {
   createProduto,
@@ -9,7 +11,40 @@ import {
 } from "../../service/produto.service.js";
 
 function Produtos() {
+  //Lista de Produtos
   const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    const buscarAteEncontrar = async () => {
+      let encontrado = false;
+
+      while (!encontrado) {
+        const data = await getProdutos();
+
+        if (Array.isArray(data) && data.length > 0) {
+          setProdutos(data);
+          console.log("Encontrado");
+          encontrado = true;
+        } else {
+          console.log("Buscando...");
+          await new Promise((resolve) => setTimeout(resolve, 2000)); // espera 2 segundos
+        }
+      }
+    };
+
+    buscarAteEncontrar();
+  }, []);
+
+  const [titulos] = useState([
+    "Código",
+    "Estoque Frente",
+    "Estoque Fundo",
+    "Total de Peças",
+  ]);
+
+  const [campos] = useState(["codigo", "quantidade", "caixa", "total"]);
+
+  const aoClicar = () => {};
 
   // Estado para Novo Cadastro
   const [novoProduto, setNovoProduto] = useState({
@@ -105,6 +140,14 @@ function Produtos() {
 
   return (
     <Container>
+      <Filtro /*mudarModal={mudarModal}*/ tela="Produto" />
+      <Lista
+        valores={produtos}
+        titulos={titulos}
+        campos={campos}
+        aoClicar={aoClicar}
+        resposta="Não há produtos em estoque"
+      />
       {/* SEÇÃO: CADASTRO */}
       <Container className="dashboard mb-4">
         <Row>

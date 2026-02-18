@@ -39,7 +39,7 @@ function Filtro(param) {
                                 </Dropdown.Item> */}
               </Dropdown.Menu>
             </Dropdown>
-          ) : param.tela === "pedido" ? (
+          ) : param.tela != "produto" ? (
             // <Dropdown>
             //     <Dropdown.Toggle variant="success" id="dropdown-basic">
             //         <i class="bi bi-tools"></i>
@@ -59,7 +59,7 @@ function Filtro(param) {
                 param.mudarModal();
               }}
             >
-              Criar Pedido
+              Novo {param.tela}
             </Button>
           ) : param.tela === "danificados" ? (
             <Dropdown>

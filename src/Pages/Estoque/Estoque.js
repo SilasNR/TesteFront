@@ -6,20 +6,6 @@ import Filtro from "../../Componentes/Filto/Filtro.js";
 function Estoque() {
   const [produtos, setProdutos] = useState([]);
 
-  //////////////////////////////////////////////////////// Buscar produtos
-  // const busacarProdutos = async () => {
-  //     const data = await getProdutos();
-  //     if (Array.isArray(data)) {
-  //         setProdutos(data);
-  //         console.log("buscando ...");
-
-  //     } else {
-  //         setProdutos([]);
-  //         console.log("não encontrado ...");
-
-  //     }
-  // };
-
   useEffect(() => {
     const buscarAteEncontrar = async () => {
       let encontrado = false;
@@ -54,7 +40,7 @@ function Estoque() {
 
   return (
     <>
-      <Filtro /*mudarModal={mudarModal}*/ tela="produto" />
+      <Filtro /*mudarModal={mudarModal}*/ tela="Produto" />
       <Lista
         valores={produtos}
         titulos={titulos}
