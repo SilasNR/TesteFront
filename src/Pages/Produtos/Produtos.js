@@ -16,6 +16,10 @@ function Produtos() {
     codigo: "",
     observacao: "",
     quantidade: "",
+    altura: "",
+    largura: "",
+    comprimento: "",
+    cubagem: "",
     pacote: "",
     caixa: "",
   });
@@ -26,6 +30,9 @@ function Produtos() {
     codigo: "",
     observacao: "",
     quantidade: "",
+    altura: "",
+    largura: "",
+    comprimento: "",
     pacote: "",
     caixa: "",
   });
@@ -62,6 +69,9 @@ function Produtos() {
         codigo: "",
         observacao: "",
         quantidade: "",
+        altura: "",
+        largura: "",
+        comprimento: "",
         pacote: "",
         caixa: "",
       });
@@ -75,6 +85,9 @@ function Produtos() {
           codigo: "",
           observacao: "",
           quantidade: "",
+          altura: "",
+          largura: "",
+          comprimento: "",
           pacote: "",
           caixa: "",
         });
@@ -94,6 +107,9 @@ function Produtos() {
           codigo: "",
           observacao: "",
           quantidade: "",
+          altura: "",
+          largura: "",
+          comprimento: "",
           pacote: "",
           caixa: "",
         });
@@ -106,65 +122,126 @@ function Produtos() {
   return (
     <Container>
       {/* SEÇÃO: CADASTRO */}
-      <Container className="dashboard mb-4">
+      <Container className="dashboard">
         <Row>
           <h1>Cadastro de Produto</h1>
         </Row>
         <Form>
+          <Form.Group as={Col}>
+            <Form.Label>Código</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.codigo}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, codigo: e.target.value })
+              }
+            />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Observação</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.observacao}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, observacao: e.target.value })
+              }
+            />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Total</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.quantidade}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, quantidade: e.target.value })
+              }
+            />
+          </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col}>
-              <Form.Label>Código</Form.Label>
+              <Form.Label>Altura</Form.Label>
               <Form.Control
                 type="text"
-                value={novoProduto.codigo}
+                value={novoProduto.altura}
                 onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, codigo: e.target.value })
+                  setNovoProduto({ ...novoProduto, altura: e.target.value })
                 }
               />
             </Form.Group>
+
             <Form.Group as={Col}>
-              <Form.Label>Observação</Form.Label>
+              <Form.Label>Largura</Form.Label>
               <Form.Control
                 type="text"
-                value={novoProduto.observacao}
+                value={novoProduto.largura}
                 onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, observacao: e.target.value })
+                  setNovoProduto({ ...novoProduto, largura: e.target.value })
                 }
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>Comprimento</Form.Label>
+              <Form.Control
+                type="text"
+                value={novoProduto.comprimento}
+                onChange={(e) =>
+                  setNovoProduto({
+                    ...novoProduto,
+                    comprimento: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>Cubagem</Form.Label>
+              <Form.Control
+                type="text"
+                value={
+                  (novoProduto.altura *
+                    novoProduto.largura *
+                    novoProduto.comprimento) /
+                  100000
+                }
+                disabled
               />
             </Form.Group>
           </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col}>
-              <Form.Label>Pacote</Form.Label>
-              <Form.Control
-                type="text"
-                value={novoProduto.pacote}
-                onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, pacote: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Caixa</Form.Label>
-              <Form.Control
-                type="text"
-                value={novoProduto.caixa}
-                onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, caixa: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Total</Form.Label>
-              <Form.Control
-                type="text"
-                value={novoProduto.quantidade}
-                onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, quantidade: e.target.value })
-                }
-              />
-            </Form.Group>
-          </Row>
+          {/* <Form.Group as={Col}>
+            <Form.Label>Cubagem</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.codigo}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, codigo: e.target.value })
+              }
+            />
+          </Form.Group> */}
+
+          <Form.Group as={Col}>
+            <Form.Label>Pacote</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.pacote}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, pacote: e.target.value })
+              }
+            />
+          </Form.Group>
+          <Form.Group as={Col}>
+            <Form.Label>Caixa</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.caixa}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, caixa: e.target.value })
+              }
+            />
+          </Form.Group>
+
           <Button onClick={salvar}>Cadastrar Novo</Button>
         </Form>
       </Container>
@@ -188,50 +265,96 @@ function Produtos() {
               </Form.Select>
             </Form.Group>
           </Row>
+          <Form.Group as={Col}>
+            <Form.Label>Observação</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.observacao}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, observacao: e.target.value })
+              }
+            />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Total</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.quantidade}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, quantidade: e.target.value })
+              }
+            />
+          </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col}>
-              <Form.Label>Observação</Form.Label>
+              <Form.Label>Altura</Form.Label>
               <Form.Control
                 type="text"
-                value={produtoEdit.observacao || ""}
+                value={novoProduto.altura}
                 onChange={(e) =>
-                  setProdutoEdit({ ...produtoEdit, observacao: e.target.value })
+                  setNovoProduto({ ...novoProduto, altura: e.target.value })
+                }
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>Largura</Form.Label>
+              <Form.Control
+                type="text"
+                value={novoProduto.largura}
+                onChange={(e) =>
+                  setNovoProduto({ ...novoProduto, largura: e.target.value })
+                }
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>Comprimento</Form.Label>
+              <Form.Control
+                type="text"
+                value={novoProduto.comprimento}
+                onChange={(e) =>
+                  setNovoProduto({
+                    ...novoProduto,
+                    comprimento: e.target.value,
+                  })
                 }
               />
             </Form.Group>
           </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col}>
-              <Form.Label>Pacote</Form.Label>
-              <Form.Control
-                type="text"
-                value={produtoEdit.pacote || ""}
-                onChange={(e) =>
-                  setProdutoEdit({ ...produtoEdit, pacote: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Caixa</Form.Label>
-              <Form.Control
-                type="text"
-                value={produtoEdit.caixa || ""}
-                onChange={(e) =>
-                  setProdutoEdit({ ...produtoEdit, caixa: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Total</Form.Label>
-              <Form.Control
-                type="text"
-                value={produtoEdit.quantidade || ""}
-                onChange={(e) =>
-                  setProdutoEdit({ ...produtoEdit, quantidade: e.target.value })
-                }
-              />
-            </Form.Group>
-          </Row>
+          {/* <Form.Group as={Col}>
+            <Form.Label>Cubagem</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.codigo}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, codigo: e.target.value })
+              }
+            />
+          </Form.Group> */}
+
+          <Form.Group as={Col}>
+            <Form.Label>Pacote</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.pacote}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, pacote: e.target.value })
+              }
+            />
+          </Form.Group>
+          <Form.Group as={Col}>
+            <Form.Label>Caixa</Form.Label>
+            <Form.Control
+              type="text"
+              value={novoProduto.caixa}
+              onChange={(e) =>
+                setNovoProduto({ ...novoProduto, caixa: e.target.value })
+              }
+            />
+          </Form.Group>
+
           <Stack gap={3} direction="horizontal">
             <Button
               variant="primary"

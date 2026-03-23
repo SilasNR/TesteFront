@@ -12,7 +12,7 @@ function SuperiorNavegacao() {
   //const ultimo = partes.pop() || partes.pop();
 
   return (
-    <Container fluid className="ps-0">
+    <Container fluid className="ps-0 vh-100">
       <Navbar
         bg="primary"
         data-bs-theme="dark"
