@@ -4,7 +4,7 @@ import Principal from "./Pages/Principal/Principal.js";
 import Login from "./Pages/Login/Login.js";
 
 /*--------------------------Conteudo ---->*/
-import Estoque from "./Pages/Estoque/Estoque.js";
+
 import Pedido from "./Pages/Pedido/Pedido.js";
 import Danificado from "./Pages/Danificado/Danificado.js";
 import Devolucao from "./Pages/Devolucao/Devolucao.js";
@@ -22,10 +22,6 @@ const Rotas = createBrowserRouter([
     path: "/Painel",
     element: <Principal />,
     children: [
-      {
-        path: "/Painel/Estoque",
-        element: <Estoque />,
-      },
       {
         path: "/Painel/Pedido",
         element: <Pedido />,

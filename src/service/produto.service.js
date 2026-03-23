@@ -22,6 +22,17 @@ export const getProdutos = async () => {
   }
 };
 
+///////////////////////////////////////////////////////////////////////////Get Produto
+export const getProduto = async (id) => {
+  try {
+    const response = await api.get(`/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao buscar produto:", error.message);
+    throw error;
+  }
+};
+
 /////////////////////////////////////////////////////////////////////// Post Produto
 export const createProduto = async (produto) => {
   try {
@@ -35,6 +46,16 @@ export const createProduto = async (produto) => {
       err.response?.data || err.message
     );
     throw err;
+  }
+};
+/////////////////////////////////////////////////////////////////////////// Atualizar Produto
+export const updateProduto = async (id, produto) => {
+  try {
+    const response = await api.patch(`/${id}`, produto);
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao atualizar produto:", error.message);
+    throw error;
   }
 };
 

@@ -1,11 +1,15 @@
 import { Row, Col, Container, Form, Button, Stack } from "react-bootstrap";
 import { useState, useEffect, useCallback } from "react";
+import Filtro from "../../Componentes/Filto/Filtro.js";
+import Lista from "../../Componentes/Lista/Lista.js";
+
 import "./Produtos.css";
 
 import {
   createProduto,
   getProdutos,
   deleteProduto,
+  updateProduto,
 } from "../../service/produto.service.js";
 
 function Produtos() {
@@ -97,6 +101,28 @@ function Produtos() {
       .catch((err) => console.error(err));
   };
 
+  const atualizar = () => {
+    if (!produtoEdit.id) return alert("Selecione um produto primeiro!");
+
+    updateProduto(produtoEdit.id, produtoEdit)
+      .then(() => {
+        setProdutoEdit({
+          id: null,
+          codigo: "",
+          observacao: "",
+          quantidade: "",
+          altura: "",
+          largura: "",
+          comprimento: "",
+          pacote: "",
+          caixa: "",
+        });
+        buscarAteEncontrar();
+        alert("Produto atualizado!");
+      })
+      .catch((err) => console.error(err));
+  };
+
   const deletar = () => {
     if (!produtoEdit.id) return alert("Selecione um produto primeiro!");
 
@@ -119,10 +145,32 @@ function Produtos() {
       .catch((err) => console.error(err));
   };
 
+  const [titulos] = useState([
+    "Código",
+    "Estoque Frente",
+    "Estoque Fundo",
+    "Total de Peças",
+  ]);
+
+  const [campos] = useState(["codigo", "observacao", "caixa", "quantidade"]);
+
+  const aoClicar = () => {};
+
   return (
     <Container>
       {/* SEÇÃO: CADASTRO */}
-      <Container className="dashboard">
+      <Row className="dashboard">
+        <Filtro /*mudarModal={mudarModal}*/ tela="produto" />
+        <Lista
+          valores={produtos}
+          titulos={titulos}
+          campos={campos}
+          aoClicar={aoClicar}
+          resposta="Não há produtos em estoque"
+        />
+      </Row>
+
+      <Row className="dashboard">
         <Row>
           <h1>Cadastro de Produto</h1>
         </Row>
@@ -244,10 +292,10 @@ function Produtos() {
 
           <Button onClick={salvar}>Cadastrar Novo</Button>
         </Form>
-      </Container>
+      </Row>
 
       {/* SEÇÃO: DADOS DO PRODUTO (EDIÇÃO/DELEÇÃO) */}
-      <Container className="dashboard">
+      <Row className="dashboard">
         <Row>
           <h1>Dados do Produto Selecionado</h1>
         </Row>
@@ -269,9 +317,9 @@ function Produtos() {
             <Form.Label>Observação</Form.Label>
             <Form.Control
               type="text"
-              value={novoProduto.observacao}
+              value={produtoEdit.observacao}
               onChange={(e) =>
-                setNovoProduto({ ...novoProduto, observacao: e.target.value })
+                setProdutoEdit({ ...produtoEdit, observacao: e.target.value })
               }
             />
           </Form.Group>
@@ -280,9 +328,9 @@ function Produtos() {
             <Form.Label>Total</Form.Label>
             <Form.Control
               type="text"
-              value={novoProduto.quantidade}
+              value={produtoEdit.quantidade}
               onChange={(e) =>
-                setNovoProduto({ ...novoProduto, quantidade: e.target.value })
+                setProdutoEdit({ ...produtoEdit, quantidade: e.target.value })
               }
             />
           </Form.Group>
@@ -291,9 +339,9 @@ function Produtos() {
               <Form.Label>Altura</Form.Label>
               <Form.Control
                 type="text"
-                value={novoProduto.altura}
+                value={produtoEdit.altura}
                 onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, altura: e.target.value })
+                  setProdutoEdit({ ...produtoEdit, altura: e.target.value })
                 }
               />
             </Form.Group>
@@ -302,9 +350,9 @@ function Produtos() {
               <Form.Label>Largura</Form.Label>
               <Form.Control
                 type="text"
-                value={novoProduto.largura}
+                value={produtoEdit.largura}
                 onChange={(e) =>
-                  setNovoProduto({ ...novoProduto, largura: e.target.value })
+                  setProdutoEdit({ ...produtoEdit, largura: e.target.value })
                 }
               />
             </Form.Group>
@@ -313,10 +361,10 @@ function Produtos() {
               <Form.Label>Comprimento</Form.Label>
               <Form.Control
                 type="text"
-                value={novoProduto.comprimento}
+                value={produtoEdit.comprimento}
                 onChange={(e) =>
-                  setNovoProduto({
-                    ...novoProduto,
+                  setProdutoEdit({
+                    ...produtoEdit,
                     comprimento: e.target.value,
                   })
                 }
@@ -327,9 +375,9 @@ function Produtos() {
             <Form.Label>Cubagem</Form.Label>
             <Form.Control
               type="text"
-              value={novoProduto.codigo}
+              value={produtoEdit.codigo}
               onChange={(e) =>
-                setNovoProduto({ ...novoProduto, codigo: e.target.value })
+                setProdutoEdit({ ...produtoEdit, codigo: e.target.value })
               }
             />
           </Form.Group> */}
@@ -338,9 +386,9 @@ function Produtos() {
             <Form.Label>Pacote</Form.Label>
             <Form.Control
               type="text"
-              value={novoProduto.pacote}
+              value={produtoEdit.pacote}
               onChange={(e) =>
-                setNovoProduto({ ...novoProduto, pacote: e.target.value })
+                setProdutoEdit({ ...produtoEdit, pacote: e.target.value })
               }
             />
           </Form.Group>
@@ -348,18 +396,15 @@ function Produtos() {
             <Form.Label>Caixa</Form.Label>
             <Form.Control
               type="text"
-              value={novoProduto.caixa}
+              value={produtoEdit.caixa}
               onChange={(e) =>
-                setNovoProduto({ ...novoProduto, caixa: e.target.value })
+                setProdutoEdit({ ...produtoEdit, caixa: e.target.value })
               }
             />
           </Form.Group>
 
           <Stack gap={3} direction="horizontal">
-            <Button
-              variant="primary"
-              onClick={() => alert("Lógica de update aqui")}
-            >
+            <Button variant="primary" onClick={atualizar}>
               Alterar
             </Button>
             <Button variant="danger" onClick={deletar}>
@@ -367,7 +412,7 @@ function Produtos() {
             </Button>
           </Stack>
         </Form>
-      </Container>
+      </Row>
     </Container>
   );
 }
