@@ -6,7 +6,7 @@ import Login from "./Pages/Login/Login.js";
 /*--------------------------Conteudo ---->*/
 
 import Pedido from "./Pages/Pedido/Pedido.js";
-import CadastroPedido from "./Pages/Pedido/Cadastro/Cadastrar.js"
+import CadastroPedido from "./Pages/Pedido/Cadastro/Cadastrar.js";
 import Danificado from "./Pages/Danificado/Danificado.js";
 import Devolucao from "./Pages/Devolucao/Devolucao.js";
 import Produtos from "./Pages/Produtos/Produtos.js";
@@ -28,9 +28,9 @@ const Rotas = createBrowserRouter([
         element: <Pedido />,
       },
       {
-        path:"/Painel/CadastroPedido",
+        path: "/Painel/CadastroPedido",
         element: <CadastroPedido />,
-      }
+      },
       {
         path: "/Painel/Danificado",
         element: <Danificado />,

@@ -1,5 +1,6 @@
 import { Row, Col, Form, Dropdown, Button, Container } from "react-bootstrap";
 import "../../Pages/Principal/Principal.css";
+import Nav from "react-bootstrap/Nav";
 import "./Filtro.css";
 
 function Filtro(param) {
