@@ -147,7 +147,7 @@ function Produtos() {
 
   const [titulos] = useState([
     "Código",
-    "Estoque Frente",
+    "Descrição",
     "Estoque Fundo",
     "Total de Peças",
   ]);
@@ -294,7 +294,7 @@ function Produtos() {
         </Form>
       </Row>
 
-      {/* SEÇÃO: DADOS DO PRODUTO (EDIÇÃO/DELEÇÃO) */}
+      {/* SEÇÃO: DADOS DO PRODUTO (EDIÇÃO/DELEÇÃO) --------------------------------------------------------------------------------*/}
       <Row className="dashboard">
         <Row>
           <h1>Dados do Produto Selecionado</h1>
