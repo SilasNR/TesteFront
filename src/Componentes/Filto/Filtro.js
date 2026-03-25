@@ -62,7 +62,10 @@ function Filtro(param) {
             // >
             //   Criar Pedido
             // </Button>
-            <Nav.Link href="/Painel/Pedido">Pedido</Nav.Link>
+
+            <Nav.Link href="/Painel/CadastroPedido">
+              <Button className="novo">Novo</Button>
+            </Nav.Link>
           ) : param.tela === "danificados" ? (
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">

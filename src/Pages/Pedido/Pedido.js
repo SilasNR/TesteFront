@@ -73,7 +73,7 @@ function Pedido() {
     <Col className="p-0">
       <h1>Controle de Pedidos</h1>
       {/* Passamos handleNovoPedido em vez de apenas abrir o modal */}
-      <Filtro mudarModal={handleNovoPedido} tela="pedido" />
+      <Filtro tela="pedido" />
 
       <Lista
         valores={pedidos}
@@ -81,15 +81,6 @@ function Pedido() {
         campos={campos}
         resposta={resposta}
         aoClicar={handleAbrirPedido}
-      />
-
-      <CadPedido
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        buscar={carregarDados} // Recarrega a lista após salvar
-        pedido={pedidoSelecionado}
-        alterar={isAlterar}
-        produtos={produtos}
       />
     </Col>
   );

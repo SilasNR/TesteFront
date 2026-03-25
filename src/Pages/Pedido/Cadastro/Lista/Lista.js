@@ -22,7 +22,7 @@ function Lista({
   }
 
   return (
-    <Container fluid className="px-3">
+    <Container fluid className="">
       {/* Cabeçalho: m-0 e gx-0 impedem o estouro da largura */}
       <Row className="titulos m-0 gx-0 align-items-center">
         {titulos.map((titulo, index) => (
@@ -42,7 +42,7 @@ function Lista({
           <Row
             key={valor.id || vIndex}
             className="linha m-0 gx-0 align-items-center border-bottom"
-            onClick={() => aoClicar(vIndex)}
+            onClick={() => {}}
           >
             {campos.map((campo, cIndex) => (
               <Col
@@ -55,7 +55,10 @@ function Lista({
                     direction="horizontal"
                     className="justify-content-center"
                   >
-                    <i className="bi bi-pencil-square text-primary"></i>
+                    <i
+                      className="bi bi-pencil-square text-primary"
+                      onClick={() => aoClicar(vIndex)}
+                    ></i>
                   </Stack>
                 ) : (
                   <p className="m-0 text-truncate">
