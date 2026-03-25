@@ -71,6 +71,7 @@ function Pedido() {
 
   return (
     <Col className="p-0">
+      <h1>Controle de Pedidos</h1>
       {/* Passamos handleNovoPedido em vez de apenas abrir o modal */}
       <Filtro mudarModal={handleNovoPedido} tela="pedido" />
 

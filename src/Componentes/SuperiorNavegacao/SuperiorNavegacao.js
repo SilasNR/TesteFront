@@ -1,5 +1,5 @@
 import "./SuperiorNavegacao.css";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 //import { useLocation } from "react-router-dom";
 
 import Nav from "react-bootstrap/Nav";
@@ -12,14 +12,14 @@ function SuperiorNavegacao() {
   //const ultimo = partes.pop() || partes.pop();
 
   return (
-    <Container fluid className="ps-0">
+    <Container fluid className="ps-0 vh-100">
       <Navbar
         bg="primary"
         data-bs-theme="dark"
         className="flex-column vh-100 align-items-start p-3"
         style={{ width: "250px" }}
       >
-        <Container className="flex-column h-100 align-items-start">
+        <Row className="flex-column h-100 align-items-start">
           <Navbar.Brand href="#home" className="mb-4">
             Logo
           </Navbar.Brand>
@@ -27,11 +27,10 @@ function SuperiorNavegacao() {
           {/* Navegação Principal */}
           <Nav className="flex-column w-100">
             <Nav.Link href="/Painel/Pedido">Pedido</Nav.Link>
-            <Nav.Link href="/Painel/Danificado">Danificados</Nav.Link>
-            <Nav.Link href="/Painel/Devolucao">Devoluções</Nav.Link>
             <Nav.Link href="/Painel/Produto">Produto</Nav.Link>
             <Nav.Link href="/Painel/Frete">Fretes</Nav.Link>
-            <Nav.Link href="/Painel/Estoque">Estoque</Nav.Link>
+            {/* <Nav.Link href="/Painel/Danificado">Danificados</Nav.Link>
+            <Nav.Link href="/Painel/Devolucao">Devoluções</Nav.Link> */}
           </Nav>
 
           {/* Bloco Inferior: O mt-auto empurra tudo abaixo dele para o fim do container */}
@@ -43,7 +42,7 @@ function SuperiorNavegacao() {
               <i className="bi bi-question-lg me-2"></i> Ajuda
             </Nav.Link>
           </Nav>
-        </Container>
+        </Row>
       </Navbar>
     </Container>
   );
