@@ -54,12 +54,11 @@ function Lista({
                 lg={campo === "" ? 1 : undefined}
               >
                 {campo === "" ? (
-                  <Form.Check
-                    type="checkbox"
-                    checked={valor.selecionado}
+                  <i
+                    class="bi bi-three-dots-vertical"
                     onChange={(e) => mudarCheckbox(e, valor.id)}
                     onClick={(e) => e.stopPropagation()}
-                  />
+                  ></i>
                 ) : (
                   <p className="m-0 text-truncate">
                     {/* text-truncate impede que nomes longos estiquem a coluna */}
