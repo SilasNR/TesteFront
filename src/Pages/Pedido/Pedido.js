@@ -1,10 +1,17 @@
 import { useEffect, useState, useCallback } from "react";
 import { Col } from "react-bootstrap";
-import { getPedidos } from "../../service/pedido.service.js";
+import { getPedidos, deletePedido } from "../../service/pedido.service.js";
 import Filtro from "../../Componentes/Filto/Filtro.js";
 import Lista from "../../Componentes/Lista/Lista.js";
+import Confirmacao from "./Confirmacao.js";
 
 function Pedido() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+
+  const [pedidoParaDelete, setPedidoParaDeletar] = useState("");
+
   const [pedidos, setPedidos] = useState([]);
   const [resposta, setResposta] = useState("");
 
@@ -53,6 +60,13 @@ function Pedido() {
     carregarDados();
   }, [carregarDados]);
 
+  const deletarPedido = (id) => {
+    console.log("Clicou no - " + id);
+    console.log("Deletar - " + pedidos[id].id);
+    deletePedido(pedidos[id].id);
+    carregarDados();
+  };
+
   return (
     <Col className="p-0">
       <h1>Controle de Pedidos</h1>
@@ -65,6 +79,21 @@ function Pedido() {
         campos={campos}
         resposta={resposta}
         aoClicar={() => {}}
+        deletar={(e) => {
+          setShow(true);
+          setPedidoParaDeletar(e);
+        }}
+      />
+      <Confirmacao
+        titulo={`Deletar ${pedidos[pedidoParaDelete]?.numero}`}
+        show={show}
+        handleClose={handleClose}
+        texto={`Deseja deletar o pedido Número: ${pedidos[pedidoParaDelete]?.numero} \n
+              Cliente: ${pedidos[pedidoParaDelete]?.cliente}
+        `}
+        deletarM={() => {
+          deletarPedido(pedidoParaDelete);
+        }}
       />
     </Col>
   );
