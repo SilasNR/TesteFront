@@ -1,18 +1,19 @@
 import { useEffect, useState, useCallback } from "react";
 import { Col } from "react-bootstrap";
-import { getPedidos } from "../../service/pedido.service.js";
-import { getProdutos } from "../../service/produto.service.js";
+import { getPedidos, deletePedido } from "../../service/pedido.service.js";
 import Filtro from "../../Componentes/Filto/Filtro.js";
 import Lista from "../../Componentes/Lista/Lista.js";
-import CadPedido from "./Cadastro/Cadastrar.js";
+import Confirmacao from "./Confirmacao.js";
 
 function Pedido() {
-  const [modalShow, setModalShow] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+
+  const [pedidoParaDelete, setPedidoParaDeletar] = useState("");
+
   const [pedidos, setPedidos] = useState([]);
-  const [produtos, setProdutos] = useState([]);
   const [resposta, setResposta] = useState("");
-  const [pedidoSelecionado, setPedidoSelecionado] = useState(null);
-  const [isAlterar, setIsAlterar] = useState(false);
 
   // Configuração fixa da tabela (não precisa ser estado se não muda)
   const titulos = [
@@ -24,40 +25,30 @@ function Pedido() {
     "Transportadora",
     "Frete",
     "Finalizado",
+    " ",
   ];
-  const campos = ["numero", "cliente"];
-
-  // Abrir para criação
-  const handleNovoPedido = () => {
-    setPedidoSelecionado(null);
-    setIsAlterar(false);
-    setModalShow(true);
-  };
-
-  // Abrir para edição
-  const handleAbrirPedido = (index) => {
-    setPedidoSelecionado(pedidos[index]);
-    setIsAlterar(true);
-    setModalShow(true);
-  };
+  const campos = [
+    "numero",
+    "cliente",
+    "cnpj",
+    "uf",
+    "volume",
+    "transportadora",
+    "frete",
+    "status",
+    "",
+  ];
 
   const carregarDados = useCallback(async () => {
     setResposta(""); // Limpa erro anterior
     try {
       // Carrega ambos em paralelo para ganhar tempo
-      const [dataPedidos, dataProdutos] = await Promise.all([
-        getPedidos(),
-        getProdutos(),
-      ]);
+      const [dataPedidos] = await Promise.all([getPedidos()]);
 
       if (Array.isArray(dataPedidos) && dataPedidos.length > 0) {
         setPedidos(dataPedidos);
       } else {
         setResposta("Nenhum pedido encontrado.");
-      }
-
-      if (Array.isArray(dataProdutos)) {
-        setProdutos(dataProdutos);
       }
     } catch (error) {
       console.error("Erro ao carregar dados:", error);
@@ -68,6 +59,13 @@ function Pedido() {
   useEffect(() => {
     carregarDados();
   }, [carregarDados]);
+
+  const deletarPedido = (id) => {
+    console.log("Clicou no - " + id);
+    console.log("Deletar - " + pedidos[id].id);
+    deletePedido(pedidos[id].id);
+    carregarDados();
+  };
 
   return (
     <Col className="p-0">
@@ -80,7 +78,22 @@ function Pedido() {
         titulos={titulos}
         campos={campos}
         resposta={resposta}
-        aoClicar={handleAbrirPedido}
+        aoClicar={() => {}}
+        deletar={(e) => {
+          setShow(true);
+          setPedidoParaDeletar(e);
+        }}
+      />
+      <Confirmacao
+        titulo={`Deletar ${pedidos[pedidoParaDelete]?.numero}`}
+        show={show}
+        handleClose={handleClose}
+        texto={`Deseja deletar o pedido Número: ${pedidos[pedidoParaDelete]?.numero} \n
+              Cliente: ${pedidos[pedidoParaDelete]?.cliente}
+        `}
+        deletarM={() => {
+          deletarPedido(pedidoParaDelete);
+        }}
       />
     </Col>
   );

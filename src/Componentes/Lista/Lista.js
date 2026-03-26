@@ -1,5 +1,6 @@
 import "./Lista.css";
-import { Row, Col, Form, Container, Spinner } from "react-bootstrap";
+
+import { Row, Col, Dropdown, Container, Spinner } from "react-bootstrap";
 
 function Lista({
   valores = [],
@@ -7,7 +8,7 @@ function Lista({
   campos = [],
   resposta = "",
   aoClicar,
-  mudarCheckbox,
+  deletar,
 }) {
   if (valores.length === 0) {
     return (
@@ -54,12 +55,28 @@ function Lista({
                 lg={campo === "" ? 1 : undefined}
               >
                 {campo === "" ? (
-                  <Form.Check
-                    type="checkbox"
-                    checked={valor.selecionado}
-                    onChange={(e) => mudarCheckbox(e, valor.id)}
-                    onClick={(e) => e.stopPropagation()}
-                  />
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="outline-secondary"
+                      id="dropdown-basic"
+                    >
+                      <i
+                        class="bi bi-three-dots-vertical"
+                        variant="outline-secondary"
+                      ></i>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        href="#/action-1"
+                        onClick={() => {
+                          deletar(vIndex);
+                        }}
+                      >
+                        Excluir
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 ) : (
                   <p className="m-0 text-truncate">
                     {/* text-truncate impede que nomes longos estiquem a coluna */}

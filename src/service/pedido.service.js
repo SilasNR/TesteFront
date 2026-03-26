@@ -17,7 +17,7 @@ export const getPedidos = async () => {
     return response.data;
   } catch (error) {
     console.error("Nada Encontrado no Backend");
-    return []; 
+    return [];
   }
 };
 
@@ -34,6 +34,17 @@ export const createPedido = async (pedido) => {
   }
 };
 
+/////////////////////////////////////////////////////////////////////// Delete Pedidos (Vários)
+export const deletePedido = async (id) => {
+  try {
+    // Note: se o seu backend espera um array direto ou um objeto { ids: [] }
+    const response = await api.delete("/", id);
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao deletar Pedidos", error.message);
+    throw error;
+  }
+};
 /////////////////////////////////////////////////////////////////////// Delete Pedidos (Vários)
 export const deletePedidos = async (ids) => {
   try {
