@@ -9,6 +9,16 @@ import { createPedido } from "../../../service/pedido.service.js";
 import { getProdutos } from "../../../service/produto.service.js";
 
 function Cadastrar(param) {
+  const [novoPedido, setNovoPedido] = useState({
+    numeroPedido: 0,
+    cliente: "",
+    cnpj: "",
+    municipio: "",
+    uf: "",
+    cep: "",
+    valor: 0,
+    peso: 0
+  });
   const [numeroPedido, setNumeroPedido] = useState();
   const [cliente, setCliente] = useState("");
   const [codigo, setCodigo] = useState("");
@@ -143,26 +153,26 @@ function Cadastrar(param) {
           <Form.Control
             type="text"
             placeholder="Nome do Cliente"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
+            value={novoPedido.cliente}
+            onChange={(e) => setNovoPedido({ ...novoPedido, cliente: e.target.value })}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
+        <Form.Group className="mb-3" controlId="formCnpj">
           <Form.Label>CNPJ:</Form.Label>
           <Form.Control
             type="text"
             placeholder="CNPJ"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
+            value={novoPedido.cnpj}
+            onChange={(e) => setNovoPedido({ ...novoPedido, cnpj: e.target.value })}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
-          <Form.Label>Estado/Cidade:</Form.Label>
+        <Form.Group className="mb-3" controlId="formMunicipio">
+          <Form.Label>Municipio":</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Estado/Cidade"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
+            placeholder="EMunicipio"
+            value={novoPedido.municipio}
+            onChange={(e) => setNovoPedido({ ...novoPedido, cliente: e.target.value })}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formCliente">
@@ -171,7 +181,7 @@ function Cadastrar(param) {
             type="text"
             placeholder="CEP"
             value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
+            onChange={(e) => setNovoPedido({ ...novoPedido, cliente: e.target.value })}
           />
         </Form.Group>
       </Col>
