@@ -55,8 +55,7 @@ function Lista({
                     direction="horizontal"
                     className="justify-content-center"
                   >
-                    <i
-                      className="bi bi-pencil-square text-primary"
+                    <i class="bi bi-trash3"
                       onClick={() => aoClicar(vIndex)}
                     ></i>
                   </Stack>
