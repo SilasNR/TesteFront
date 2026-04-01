@@ -37,11 +37,11 @@ export const createPedido = async (pedido) => {
 /////////////////////////////////////////////////////////////////////// Delete Pedidos (Vários)
 export const deletePedido = async (id) => {
   try {
-    // Note: se o seu backend espera um array direto ou um objeto { ids: [] }
-    const response = await api.delete("/", id);
+    // Certifique-se de que não haja um "pedidos" extra aqui
+    const response = await api.delete(`/${id}`); 
     return response.data;
   } catch (error) {
-    console.error("Erro ao deletar Pedidos", error.message);
+    console.error("Erro ao deletar Pedido", error.message);
     throw error;
   }
 };

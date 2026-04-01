@@ -103,8 +103,8 @@ function Cadastrar(param) {
           <Form.Control
             type="text"
             placeholder="N° Pedido"
-            value={novoPedido.numeroPedido}
-            onChange={(e) => setNovoPedido({ ...novoPedido, numeroPedido: e.target.value })}
+            value={novoPedido.numero}
+            onChange={(e) => setNovoPedido({ ...novoPedido, numero: e.target.value })}
           />
         </FloatingLabel>
 
@@ -158,7 +158,6 @@ function Cadastrar(param) {
           <FloatingLabel controlId="floatingSelect" label="Valor" className="mb-3">
             <Form.Control
               type="text"
-              step="0.00"
               value={novoPedido.valor}
               onChange={(e) => setNovoPedido({ ...novoPedido, valor: e.target.value })}
             />

@@ -25,7 +25,7 @@ function Pedido() {
     "Transportadora",
     "Frete",
     "Finalizado",
-    " ",
+    "",
   ];
   const campos = [
     "numero",
