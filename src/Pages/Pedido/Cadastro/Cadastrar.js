@@ -98,38 +98,41 @@ function Cadastrar(param) {
   return (
     <Container>
       <h1>Cadastro de Pedido</h1>
-      <Col className="separador mb-3 dashboard">
-        <FloatingLabel controlId="floatingSelect" label="Número do pedido" className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="N° Pedido"
-            value={novoPedido.numero}
-            onChange={(e) => setNovoPedido({ ...novoPedido, numero: e.target.value })}
-          />
-        </FloatingLabel>
+      <Col className=" mb-3 dashboard">
+        <Row className="">
+          <FloatingLabel controlId="floatingSelect" label="Número do pedido" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="N° Pedido"
+              value={novoPedido.numero}
+              onChange={(e) => setNovoPedido({ ...novoPedido, numero: e.target.value })}
+            />
+          </FloatingLabel>
 
-        <FloatingLabel controlId="floatingSelect" label="Cliente" className="mb-3">
-          <Form.Label></Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Nome do Cliente"
-            value={novoPedido.cliente}
-            onChange={(e) => setNovoPedido({ ...novoPedido, cliente: e.target.value })}
-          />
-        </FloatingLabel>
+          <FloatingLabel controlId="floatingSelect" label="Cliente" className="mb-3">
+            <Form.Label></Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nome do Cliente"
+              value={novoPedido.cliente}
+              onChange={(e) => setNovoPedido({ ...novoPedido, cliente: e.target.value })}
+            />
+          </FloatingLabel>
 
-        <FloatingLabel controlId="floatingSelect" label="CNPJ" className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="CNPJ"
-            value={novoPedido.cnpj}
-            onChange={(e) => setNovoPedido({ ...novoPedido, cnpj: e.target.value })}
-          />
-        </FloatingLabel>
+          <FloatingLabel controlId="floatingSelect" label="CNPJ" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="CNPJ"
+              value={novoPedido.cnpj}
+              onChange={(e) => setNovoPedido({ ...novoPedido, cnpj: e.target.value })}
+            />
+          </FloatingLabel>
+        </Row>
 
         <FloatingLabel controlId="floatingSelect" label="UF" className="mb-3">
           <Form.Control
             type="text"
+            placeholder="UF"
             value={novoPedido.uf}
             onChange={(e) => setNovoPedido({ ...novoPedido, uf: e.target.value })}
           />
@@ -138,6 +141,7 @@ function Cadastrar(param) {
         <FloatingLabel controlId="floatingSelect" label="Municipio" className="mb-3">
           <Form.Control
             type="text"
+            placeholder="Municipio"
             value={novoPedido.municipio}
             onChange={(e) => setNovoPedido({ ...novoPedido, municipio: e.target.value })}
           />
@@ -158,7 +162,8 @@ function Cadastrar(param) {
           <FloatingLabel controlId="floatingSelect" label="Valor" className="mb-3">
             <Form.Control
               type="text"
-              value={novoPedido.valor}
+              placeholder="Valor"
+              value={novoPedido.Valor}
               onChange={(e) => setNovoPedido({ ...novoPedido, valor: e.target.value })}
             />
           </FloatingLabel>
@@ -168,6 +173,7 @@ function Cadastrar(param) {
           <FloatingLabel controlId="floatingSelect" label="Peso" className="mb-3">
             <Form.Control
               type="text"
+              placeholder="CNPJ"
               value={novoPedido.peso}
               onChange={(e) => setNovoPedido({ ...novoPedido, peso: e.target.value })}
             />

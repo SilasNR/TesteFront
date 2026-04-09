@@ -13,6 +13,8 @@ import Produtos from "./Pages/Produtos/Produtos.js";
 import Frete from "./Pages/Frete/Frete.js";
 import Configuracoes from "./Pages/Configuracoes/Configuracoes.js";
 import Ajuda from "./Pages/Ajuda/Ajuda.js";
+import Dashboard from "./Pages/DashBoard/dashboard.js";
+import Transportadora from "./Pages/Transportadora/transportadora.js";
 
 const Rotas = createBrowserRouter([
   {
@@ -20,9 +22,13 @@ const Rotas = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/Painel",
+    path: "/",
     element: <Principal />,
     children: [
+      {
+        path: "/Painel",
+        element: <Dashboard />,
+      },
       {
         path: "/Painel/Pedido",
         element: <Pedido />,
@@ -46,6 +52,10 @@ const Rotas = createBrowserRouter([
       {
         path: "/Painel/Frete",
         element: <Frete />,
+      },
+      {
+        path: "/Painel/Transportadora",
+        element: <Transportadora />,
       },
       {
         path: "/Painel/Configuracoes",
