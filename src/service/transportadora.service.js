@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // URL do seu backend no Render para Pedidos
-const URL = "https://backend-basico.onrender.com/pedidos";
+const URL = "https://backend-basico.onrender.com/transportadora";
 
 const api = axios.create({
   baseURL: URL,
@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 /////////////////////////////////////////////////////////////////////// Get Pedidos
-export const getPedidos = async () => {
+export const getTransportadora = async () => {
   try {
     const response = await api.get("/");
     return response.data;
@@ -22,14 +22,14 @@ export const getPedidos = async () => {
 };
 
 /////////////////////////////////////////////////////////////////////// Post Pedido
-export const createPedido = async (pedido) => {
+export const createTransportadora= async (transportadora) => {
   try {
     // Trocado de Fetch para Axios para manter o padrão do projeto
-    const response = await api.post("/", pedido);
-    console.log("Pedido cadastrado:", response.data);
+    const response = await api.post("/", transportadora);
+    console.log("Transportadora cadastrado:", response.data);
     return response.data;
   } catch (err) {
-    console.error("Erro ao enviar Pedido: ", err.response?.data || err.message);
+    console.error("Erro ao enviar transportadora: ", err.response?.data || err.message);
     throw err;
   }
 };

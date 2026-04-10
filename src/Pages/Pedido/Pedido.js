@@ -67,11 +67,27 @@ function Pedido() {
     carregarDados();
   };
 
+  const filtos = [
+    {
+      nome:"Crecente",
+      icone:"bi bi-arrow-up-short"
+    },
+    {
+      nome:"Descrecente",
+      icone:"bi bi-arrow-down-short"
+    },
+  ]
+
   return (
     <Col className="p-0">
       <h1>Controle de Pedidos</h1>
       {/* Passamos handleNovoPedido em vez de apenas abrir o modal */}
-      <Filtro tela="pedido" />
+      <Filtro 
+        tela="pedido" 
+        textoBusca="Digite o número do pedido, nome do Cliente" 
+        filtros={filtos}
+        caminho="/Painel/CadastroPedido"
+      />
 
       <Lista
         valores={pedidos}

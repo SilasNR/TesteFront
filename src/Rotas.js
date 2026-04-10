@@ -15,6 +15,7 @@ import Configuracoes from "./Pages/Configuracoes/Configuracoes.js";
 import Ajuda from "./Pages/Ajuda/Ajuda.js";
 import Dashboard from "./Pages/DashBoard/dashboard.js";
 import Transportadora from "./Pages/Transportadora/transportadora.js";
+//import Cadastrar from "./Pages/Cadastro/Cadastrar.js";
 
 const Rotas = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const Rotas = createBrowserRouter([
         path: "/Painel/Transportadora",
         element: <Transportadora />,
       },
+      // {
+      //   path: "/Painel/Cadastro",
+      //   element: <Cadastrar />,
+      // },
       {
         path: "/Painel/Configuracoes",
         element: <Configuracoes />,
