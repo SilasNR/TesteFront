@@ -17,7 +17,8 @@ function Cadastrar(param) {
     uf: "",
     cep: "",
     valor: "",
-    peso: ""
+    peso: "",
+    status:"Pendente"
   });
   const [quantidade, setQuantidade] = useState("");
   const [lista, setLista] = useState([]);
@@ -80,6 +81,7 @@ function Cadastrar(param) {
       ...novoPedido,
       valor: parseFloat(novoPedido.valor) || 0,
       peso: parseFloat(novoPedido.peso) || 0,
+
       produtos: lista,
     };
     console.log(pedido);

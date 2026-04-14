@@ -12,10 +12,10 @@ function ProdutoList() {
     <>
       <Container fluid className="p-0">
         <Row className="m-0">
-          <Col className="p-0" md="auto">
+          <Col className="p-0  position-fixed" md="auto">
             <SuperiorNavegacao />
           </Col>
-          <Col className="ps-0">
+          <Col className="ps-0 menulado">
             <Outlet />
           </Col>
         </Row>

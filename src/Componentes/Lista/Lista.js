@@ -24,7 +24,7 @@ function Lista({
 
   return (
     /* g-0 no Container e m-0 nas Rows removem as margens que causam scroll X */
-    <Container fluid className="px-2">
+    <Container fluid className="px-2 mh-3">
       {/* Cabeçalho */}
       <Row className="bg-light fw-bold border-bottom m-0">
         {titulos.map((titulo, index) => (
