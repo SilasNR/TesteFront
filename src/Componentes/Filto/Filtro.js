@@ -3,7 +3,7 @@ import "../../Pages/Principal/Principal.css";
 import Nav from "react-bootstrap/Nav";
 import "./Filtro.css";
 
-function Filtro(param) {
+function Filtro({termoBusca, textoBusca, aoFiltrar, filtros, caminho }) {
   return (
     <Container fluid className="mb-3">
       <Row className="barra d-flex align-items-center">
@@ -12,84 +12,36 @@ function Filtro(param) {
           <Form.Control
             className="txt"
             type="text"
-            placeholder="numero, cliente"
-            value={param.termoBusca} // Você deve passar isso via props do componente pai
-            onChange={(e) => param.aoFiltrar(e.target.value)} // E uma função para atualizar
+            placeholder={textoBusca}
+            value={termoBusca} // Você deve passar isso via props do componente pai
+            onChange={(e) => aoFiltrar(e.target.value)} // E uma função para atualizar
           />
           <i class="bi bi-arrow-clockwise"></i>
         </Col>
+
         <Col xs lg="2">
-          {param.tela === "produto" ? (
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <i class="bi bi-funnel"> Filto</i>
-              </Dropdown.Toggle>
+          <Row>
+            <Col>
+              <Nav.Link href={caminho}>
+                <Button className="novo">Novo</Button>
+              </Nav.Link>
+            </Col>
+            <Col>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <i class="bi bi-funnel"></i>
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <i class="bi bi-arrow-up-short"> Crescente</i>
-                </Dropdown.Item>
-                <Dropdown.Item href="#/action-1">
-                  <i class="bi bi-arrow-down-short"> Decrecente</i>
-                </Dropdown.Item>
-                {/* <Dropdown.Item href="#/action-1">
-                                    <i class="bi bi-calendar-event">  Data de Modificação</i>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-1">
-                                    <i class="bi bi-arrow-up-short">  Crescente</i>
-                                </Dropdown.Item> */}
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : param.tela === "pedido" ? (
-            // <Dropdown>
-            //     <Dropdown.Toggle variant="success" id="dropdown-basic">
-            //         <i class="bi bi-tools"></i>
-            //     </Dropdown.Toggle>
-
-            //     {/* <Dropdown.Menu>
-            //         <Dropdown.Item href="#/action-1" onClick={() => {
-            //             param.mudarModal()
-            //         }}>
-            //             <i class="bi bi-plus-circle-dotted">  Criar Pedido</i>
-            //         </Dropdown.Item>
-            //         <Dropdown.Item href="#/action-2"><i class="bi bi-pencil-fill">  Alterar</i>   </Dropdown.Item>
-            //     </Dropdown.Menu> */}
-            // </Dropdown>
-            // <Button
-            //   onClick={() => {
-            //     param.mudarModal();
-            //   }}
-            // >
-            //   Criar Pedido
-            // </Button>
-
-            <Nav.Link href="/Painel/CadastroPedido">
-              <Button className="novo">Novo</Button>
-            </Nav.Link>
-          ) : param.tela === "danificados" ? (
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <i class="bi bi-funnel"> Filto</i>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <i class="bi bi-arrow-up-short"> Crescente</i>
-                </Dropdown.Item>
-                <Dropdown.Item href="#/action-1">
-                  <i class="bi bi-arrow-down-short"> Decrecente</i>
-                </Dropdown.Item>
-                {/* <Dropdown.Item href="#/action-1">
-                                    <i class="bi bi-calendar-event">  Data de Modificação</i>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-1">
-                                    <i class="bi bi-arrow-up-short">  Crescente</i>
-                                </Dropdown.Item> */}
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            ""
-          )}
+                <Dropdown.Menu>
+                  {filtros.map((filtro) => (
+                    <Dropdown.Item >
+                      <i class={filtro.icone}> {filtro.nome}</i>
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>

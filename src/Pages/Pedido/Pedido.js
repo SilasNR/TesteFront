@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Col } from "react-bootstrap";
+import { Col,Row } from "react-bootstrap";
 import { getPedidos, deletePedido } from "../../service/pedido.service.js";
 import Filtro from "../../Componentes/Filto/Filtro.js";
 import Lista from "../../Componentes/Lista/Lista.js";
@@ -22,19 +22,15 @@ function Pedido() {
     "CNPJ",
     "Cidade - UF",
     "Volume",
-    "Transportadora",
-    "Frete",
-    "Finalizado",
+    "Status",
     "",
   ];
   const campos = [
     "numero",
     "cliente",
     "cnpj",
-    "uf",
+    "municipio",
     "volume",
-    "transportadora",
-    "frete",
     "status",
     "",
   ];
@@ -67,23 +63,40 @@ function Pedido() {
     carregarDados();
   };
 
+  const filtos = [
+    {
+      nome: "Crecente",
+      icone: "bi bi-arrow-up-short"
+    },
+    {
+      nome: "Descrecente",
+      icone: "bi bi-arrow-down-short"
+    },
+  ]
+
   return (
     <Col className="p-0">
       <h1>Controle de Pedidos</h1>
       {/* Passamos handleNovoPedido em vez de apenas abrir o modal */}
-      <Filtro tela="pedido" />
-
-      <Lista
-        valores={pedidos}
-        titulos={titulos}
-        campos={campos}
-        resposta={resposta}
-        aoClicar={() => {}}
-        deletar={(e) => {
-          setShow(true);
-          setPedidoParaDeletar(e);
-        }}
+      <Filtro
+        tela="pedido"
+        textoBusca="Digite o número do pedido, nome do Cliente"
+        filtros={filtos}
+        caminho="/Painel/CadastroPedido"
       />
+
+        <Lista
+          valores={pedidos}
+          titulos={titulos}
+          campos={campos}
+          resposta={resposta}
+          aoClicar={() => { }}
+          deletar={(e) => {
+            setShow(true);
+            setPedidoParaDeletar(e);
+          }}
+        />
+
       <Confirmacao
         titulo={`Deletar ${pedidos[pedidoParaDelete]?.numero}`}
         show={show}
