@@ -64,6 +64,7 @@ function Transportadora() {
             tela="pedido"
             textoBusca="Digite o nome da Transportadora"
             filtros={filtros}
+            caminho="/Painel/CadastroTransportadora"
           />
 
           <Lista
