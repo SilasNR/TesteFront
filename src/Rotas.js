@@ -14,8 +14,9 @@ import Frete from "./Pages/Frete/Frete.js";
 import Configuracoes from "./Pages/Configuracoes/Configuracoes.js";
 import Ajuda from "./Pages/Ajuda/Ajuda.js";
 import Dashboard from "./Pages/DashBoard/dashboard.js";
-import Transportadora from "./Pages/Transportadora/transportadora.js";
-//import Cadastrar from "./Pages/Cadastro/Cadastrar.js";
+import Transportadora from "./Pages/Transportadora/Transportadora.js";
+import CadastroTransportadora from "./Pages/Transportadora/Cadastrar/Casdastar.js"
+
 
 const Rotas = createBrowserRouter([
   {
@@ -58,10 +59,10 @@ const Rotas = createBrowserRouter([
         path: "/Painel/Transportadora",
         element: <Transportadora />,
       },
-      // {
-      //   path: "/Painel/Cadastro",
-      //   element: <Cadastrar />,
-      // },
+      {
+        path: "/Painel/CadastroTransportadora",
+        element: <CadastroTransportadora />,
+      },
       {
         path: "/Painel/Configuracoes",
         element: <Configuracoes />,
