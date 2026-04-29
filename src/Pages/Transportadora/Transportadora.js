@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 
 import Filtro from "../../Componentes/Filto/Filtro"
 import Lista from "../../Componentes/Lista/Lista";
-import { createTransportadora, getTransportadora } from "../../service/transportadora.service";
+import { getTransportadora } from "../../service/transportadora.service";
 
 function Transportadora() {
 
