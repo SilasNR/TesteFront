@@ -13,124 +13,62 @@ function Cadastrar(param) {
   });
 
   const [estadoSelecionado, setEstadoSelecionado] = useState([
-    {
-      nome: 'AC',
-      selecao: false,
-    },
-    {
-      nome: 'AM',
-      selecao: false,
-    },
-    {
-      nome: 'AP',
-      selecao: false,
-    },
-    {
-      nome: 'AL',
-      selecao: false,
-    },
-    {
-      nome: 'BA',
-      selecao: false,
-    },
-    {
-      nome: 'CE',
-      selecao: false,
-    },
-    {
-      nome: 'DF',
-      selecao: false,
-    },
-    {
-      nome: 'ES',
-      selecao: false,
-    },
-    {
-      nome: 'GO',
-      selecao: false,
-    },
-    {
-      nome: 'MA',
-      selecao: false,
-    },
-    {
-      nome: 'MG',
-      selecao: false,
-    },
-    {
-      nome: 'MS',
-      selecao: false,
-    },
-    {
-      nome: 'MT',
-      selecao: false,
-    },
-    {
-      nome: 'PA',
-      selecao: false,
-    },
-    {
-      nome: 'PB',
-      selecao: false,
-    },
-    {
-      nome: 'PE',
-      selecao: false,
-    },
-    {
-      nome: 'PI',
-      selecao: false,
-    },
-    {
-      nome: 'PR',
-      selecao: false,
-    },
-    {
-      nome: 'RJ',
-      selecao: false,
-    },
-    {
-      nome: 'RN',
-      selecao: false,
-    },
-    {
-      nome: 'RO',
-      selecao: false,
-    },
-    {
-      nome: 'RR',
-      selecao: false,
-    },
-    {
-      nome: 'RS',
-      selecao: false,
-    },
-    {
-      nome: 'SC',
-      selecao: false,
-    },
-    {
-      nome: 'SE',
-      selecao: false,
-    },
-    {
-      nome: 'SP',
-      selecao: false,
-    },
-    {
-      nome: 'TO',
-      selecao: false,
-    },
+    {nome: 'AC',selecao: false,},
+    {nome: 'AM',selecao: false,},
+    {nome: 'AP',selecao: false,},
+    {nome: 'AL',selecao: false,},
+    {nome: 'BA',selecao: false,},
+    {nome: 'CE',selecao: false,},
+    {nome: 'DF',selecao: false,},
+    {nome: 'ES',selecao: false,},
+    {nome: 'GO',selecao: false,},
+    {nome: 'MA',selecao: false,},
+    {nome: 'MG',selecao: false,},
+    {nome: 'MS',selecao: false,},
+    {nome: 'MT',selecao: false,},
+    {nome: 'PA',selecao: false,},
+    {nome: 'PB',selecao: false,},
+    {nome: 'PE',selecao: false,},
+    {nome: 'PI',selecao: false,},
+    {nome: 'PR',selecao: false,},
+    {nome: 'RJ',selecao: false,},
+    {nome: 'RN',selecao: false,},
+    {nome: 'RO',selecao: false,},
+    {nome: 'RR',selecao: false,},
+    {nome: 'RS',selecao: false,},
+    {nome: 'SC',selecao: false,},
+    {nome: 'SE',selecao: false,},
+    {nome: 'SP',selecao: false,},
+    {nome: 'TO',selecao: false,},
   ])
 
+  const nomesEstados = {
+    'AC': 'Acre', 'AL': 'Alagoas', 'AP': 'Amapá', 'AM': 'Amazonas',
+    'BA': 'Bahia', 'CE': 'Ceará', 'DF': 'Distrito Federal', 'ES': 'Espírito Santo',
+    'GO': 'Goiás', 'MA': 'Maranhão', 'MT': 'Mato Grosso', 'MS': 'Mato Grosso do Sul',
+    'MG': 'Minas Gerais', 'PA': 'Pará', 'PB': 'Paraíba', 'PR': 'Paraná',
+    'PE': 'Pernambuco', 'PI': 'Piauí', 'RJ': 'Rio de Janeiro', 'RN': 'Rio Grande do Norte',
+    'RS': 'Rio Grande do Sul', 'RO': 'Rondônia', 'RR': 'Roraima', 'SC': 'Santa Catarina',
+    'SP': 'São Paulo', 'SE': 'Sergipe', 'TO': 'Tocantins'
+  };
+
+  const [lista, setLista] = useState([]);
   const alternarSelecao = (nome) => {
+    console.log(lista);
+
     setEstadoSelecionado(prevEstado =>
       prevEstado.map(item => {
         if (item.nome === nome) {
-          // Retorna uma cópia do objeto com o valor de selecao invertido
-          // setLista(item.nome);
-          // console.log(lista);
-          
+          const existe = lista.find(i => i.nome === item.nome);
+
+          if (existe) {
+            // Se já existe, removemos (filtra mantendo apenas os diferentes)
+            setLista(lista.filter(i => i.nome !== item.nome));
+
+          } else {
+            // Se não existe, adicionamos (mantém os atuais + o novo)
+            setLista([...lista, item.nome]);
+          }
           return { ...item, selecao: !item.selecao };
         }
         // Se não for o estado clicado, retorna ele sem mudanças
@@ -139,18 +77,15 @@ function Cadastrar(param) {
     );
   };
 
-  const [lista, setLista] = useState([]);
-
 
   /*-------------------------------------------------------------------------------------------------------Salvar*/
   const salvar = () => {
     const transportadora = {
       ...novaTransportadora,
-      nome: parseFloat(novaTransportadora.nome) || 0,
-      cnpj: parseFloat(novaTransportadora.cnpj) || 0,
-      endereco: parseFloat(novaTransportadora.endereco) || 0,
-
-      lista: lista,
+      nome: novaTransportadora.nome || "",
+      cnpj: novaTransportadora.cnpj?.toString().replace(/\D/g, '') || "",
+      endereco: novaTransportadora.endereco || "",
+      estado: lista.map((item, index) => { return { nome: nomesEstados[item], sigla: item } }),
     };
     console.log(transportadora);
     createTransportadora(transportadora)
@@ -229,7 +164,7 @@ function Cadastrar(param) {
         </Form.Group>
 
       </Col>
-      <Col className="dashboard" style={{border: 'none'}}>
+      <Col className="dashboard" style={{ border: 'none' }}>
         <Row className="gap-2">
           <Button
             onClick={() => {

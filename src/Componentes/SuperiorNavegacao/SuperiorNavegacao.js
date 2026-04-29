@@ -20,11 +20,9 @@ function SuperiorNavegacao() {
         style={{ width: "250px" }}
       >
         <Row className="flex-column h-100 align-items-start">
-          <Nav.Link href="/Painel/Pedido">
-            <Navbar.Brand href="/Painel" className="mb-4">
-              Logo
-            </Navbar.Brand>
-          </Nav.Link>
+          <Navbar.Brand href="/Painel" className="mb-4">
+            Logo
+          </Navbar.Brand>
 
           {/* Navegação Principal */}
           <Nav className="flex-column w-100">
