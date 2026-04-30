@@ -156,11 +156,26 @@ function Produtos() {
 
   const aoClicar = () => {};
 
+  const filtros = [
+    {
+      nome: "Crecente",
+      icone: "bi bi-arrow-up-short"
+    },
+    {
+      nome: "Descrecente",
+      icone: "bi bi-arrow-down-short"
+    },
+  ]
+
   return (
     <Container>
       {/* SEÇÃO: CADASTRO */}
       <Row className="dashboard">
-        <Filtro /*mudarModal={mudarModal}*/ tela="produto" />
+        <Filtro
+            tela="pedido"
+            textoBusca="Digite o número do pedido, nome do Cliente"
+            filtros={filtros}
+          />
         <Lista
           valores={produtos}
           titulos={titulos}

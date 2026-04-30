@@ -20,7 +20,7 @@ function SuperiorNavegacao() {
         style={{ width: "250px" }}
       >
         <Row className="flex-column h-100 align-items-start">
-          <Navbar.Brand href="#home" className="mb-4">
+          <Navbar.Brand href="/Painel" className="mb-4">
             Logo
           </Navbar.Brand>
 
@@ -29,6 +29,7 @@ function SuperiorNavegacao() {
             <Nav.Link href="/Painel/Pedido">Pedido</Nav.Link>
             <Nav.Link href="/Painel/Produto">Produto</Nav.Link>
             <Nav.Link href="/Painel/Frete">Fretes</Nav.Link>
+            <Nav.Link href="/Painel/Transportadora">Transportadoras</Nav.Link>
             {/* <Nav.Link href="/Painel/Danificado">Danificados</Nav.Link>
             <Nav.Link href="/Painel/Devolucao">Devoluções</Nav.Link> */}
           </Nav>

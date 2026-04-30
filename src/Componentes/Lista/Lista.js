@@ -24,7 +24,7 @@ function Lista({
 
   return (
     /* g-0 no Container e m-0 nas Rows removem as margens que causam scroll X */
-    <Container fluid className="px-2">
+    <Container fluid className="px-2 mh-3">
       {/* Cabeçalho */}
       <Row className="bg-light fw-bold border-bottom m-0">
         {titulos.map((titulo, index) => (
@@ -81,6 +81,22 @@ function Lista({
                   <p className="m-0 text-truncate">
                     {/* text-truncate impede que nomes longos estiquem a coluna */}
                     {cIndex > 2 ? valor[campo] / 10 : valor[campo]}
+                    {/* {(() => {
+                      const conteudo = valor[campo];
+
+                      // 1. Se for a lista (Array) de estados
+                      if (Array.isArray(conteudo)) {
+                        return conteudo.map(e => e.Nome || e.nome).join(", ");
+                      }
+
+                      // 2. Se for um objeto único de estado (caso não seja array)
+                      if (typeof conteudo === 'object' && conteudo !== null) {
+                        return conteudo.Nome || conteudo.nome || "";
+                      }
+
+                      // 3. Lógica que você já tinha para números/strings
+                      return cIndex > 2 ? conteudo / 10 : conteudo;
+                    })()} */}
                   </p>
                 )}
               </Col>

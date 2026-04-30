@@ -1,6 +1,6 @@
 import "../../Principal/Principal.css";
 import Button from "react-bootstrap/Button";
-import { Form, Col, Row, Stack, Container } from "react-bootstrap";
+import { Form, Col, Row, Stack, Container, InputGroup, FloatingLabel } from "react-bootstrap";
 import { useState, useEffect, useCallback } from "react";
 
 import Lista from "./Lista/Lista.js";
@@ -9,9 +9,17 @@ import { createPedido } from "../../../service/pedido.service.js";
 import { getProdutos } from "../../../service/produto.service.js";
 
 function Cadastrar(param) {
-  const [numeroPedido, setNumeroPedido] = useState();
-  const [cliente, setCliente] = useState("");
-  const [codigo, setCodigo] = useState("");
+  const [novoPedido, setNovoPedido] = useState({
+    numero: "",
+    cliente: "",
+    cnpj: "",
+    municipio: "",
+    uf: "",
+    cep: "",
+    valor: "",
+    peso: "",
+    status:"Pendente"
+  });
   const [quantidade, setQuantidade] = useState("");
   const [lista, setLista] = useState([]);
 
@@ -39,47 +47,14 @@ function Cadastrar(param) {
     buscarAteEncontrar();
   }, [buscarAteEncontrar]);
 
-  useEffect(() => {
-    if (param.pedido) {
-      setNumeroPedido(param.pedido.numero || "");
-      setNumeroPedido(param.pedido.numero || "");
-      setCliente(param.pedido.cliente || "");
-      setLista(param.pedido.lista || []);
-      console.log("Lista recebida:", param.pedido.lista);
-    }
-  }, [param.pedido]);
 
-  useEffect(() => {
-    if (!param.show) {
-      // Limpando campos quando o modal fecha
-      setNumeroPedido("");
-      setCliente("");
-      setLista([]);
-      setCodigo("");
-      setQuantidade("");
-    }
-  }, [param.show]);
-
-  const limpar = () => {
-    param.onHide();
-    setNumeroPedido("");
-    setCliente("");
-    setCodigo("");
-    setQuantidade("");
-    setLista([]);
-  };
 
   const selecionado = (e) => {
-    ////////////Pega as imformações do produto selecionado no espaço Dados do Produto
-    const index = parseInt(e.target.value, 10); // Converte para número
-    //const produto = param.produtos[index];
-    //console.log(produto);
-    //setProdSelect(produto);
+    const index = parseInt(e.target.value, 10);
     if (index >= 0) {
-      console.log(index);
-      //   // Preenche o objeto de edição com todos os dados do produto selecionado
       setProdSelect(produtos[index]);
-      // } else {
+    } else {
+      setProdSelect([]); // Limpa se selecionar a opção vazia
     }
   };
 
@@ -96,28 +71,25 @@ function Cadastrar(param) {
 
   /*-------------------------------------------------------------------------------------------------------AdicionarProd*/
   const removerProd = (index) => {
-    console.log(index);
-    const newArray = lista.filter((indexlista) => index !== indexlista);
-    console.log("lista = " + lista);
-    console.log("Nova = " + newArray);
+    const newArray = lista.filter((_, e) => index !== e);
     setLista(newArray); // Updates the state with the new array
   };
 
   /*-------------------------------------------------------------------------------------------------------Salvar*/
   const salvar = () => {
     const pedido = {
-      numero: numeroPedido,
-      cliente: cliente,
+      ...novoPedido,
+      valor: parseFloat(novoPedido.valor) || 0,
+      peso: parseFloat(novoPedido.peso) || 0,
+
       produtos: lista,
     };
     console.log(pedido);
     createPedido(pedido)
       .then((resultado) => {
         console.log("Pedido criado:", resultado);
-        // aqui você pode limpar o formulário, fechar modal etc
       })
       .catch((err) => {
-        // tratar erro
         console.error(err);
       });
   };
@@ -128,87 +100,121 @@ function Cadastrar(param) {
   return (
     <Container>
       <h1>Cadastro de Pedido</h1>
-      <Col className="separador mb-3 dashboard">
-        <Form.Group className="mb-3 " controlId="formNumeroPedido">
-          <Form.Label>Numero do pedido:</Form.Label>
+      <Col className=" mb-3 dashboard">
+        <Row className="">
+          <FloatingLabel controlId="floatingSelect" label="Número do pedido" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="N° Pedido"
+              value={novoPedido.numero}
+              onChange={(e) => setNovoPedido({ ...novoPedido, numero: e.target.value })}
+            />
+          </FloatingLabel>
+
+          <FloatingLabel controlId="floatingSelect" label="Cliente" className="mb-3">
+            <Form.Label></Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nome do Cliente"
+              value={novoPedido.cliente}
+              onChange={(e) => setNovoPedido({ ...novoPedido, cliente: e.target.value })}
+            />
+          </FloatingLabel>
+
+          <FloatingLabel controlId="floatingSelect" label="CNPJ" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="CNPJ"
+              value={novoPedido.cnpj}
+              onChange={(e) => setNovoPedido({ ...novoPedido, cnpj: e.target.value })}
+            />
+          </FloatingLabel>
+        </Row>
+
+        <FloatingLabel controlId="floatingSelect" label="UF" className="mb-3">
           <Form.Control
             type="text"
-            placeholder="N° Pedido"
-            value={numeroPedido}
-            onChange={(e) => setNumeroPedido(e.target.value)}
+            placeholder="UF"
+            value={novoPedido.uf}
+            onChange={(e) => setNovoPedido({ ...novoPedido, uf: e.target.value })}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
-          <Form.Label>Cliente:</Form.Label>
+        </FloatingLabel>
+
+        <FloatingLabel controlId="floatingSelect" label="Municipio" className="mb-3">
           <Form.Control
             type="text"
-            placeholder="Nome do Cliente"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
+            placeholder="Municipio"
+            value={novoPedido.municipio}
+            onChange={(e) => setNovoPedido({ ...novoPedido, municipio: e.target.value })}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
-          <Form.Label>CNPJ:</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="CNPJ"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
-          <Form.Label>Estado/Cidade:</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Estado/Cidade"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formCliente">
-          <Form.Label>CEP:</Form.Label>
+        </FloatingLabel>
+
+        <FloatingLabel controlId="floatingSelect" label="CEP" className="mb-3">
           <Form.Control
             type="text"
             placeholder="CEP"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
+            value={novoPedido.cep}
+            onChange={(e) => setNovoPedido({ ...novoPedido, cep: e.target.value })}
           />
-        </Form.Group>
+        </FloatingLabel>
+
+
+        <InputGroup className="mb-3">
+          <InputGroup.Text>R$</InputGroup.Text>
+          <FloatingLabel controlId="floatingSelect" label="Valor" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Valor"
+              value={novoPedido.Valor}
+              onChange={(e) => setNovoPedido({ ...novoPedido, valor: e.target.value })}
+            />
+          </FloatingLabel>
+        </InputGroup>
+
+        <InputGroup className="mb-3">
+          <FloatingLabel controlId="floatingSelect" label="Peso" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="CNPJ"
+              value={novoPedido.peso}
+              onChange={(e) => setNovoPedido({ ...novoPedido, peso: e.target.value })}
+            />
+          </FloatingLabel>
+          <InputGroup.Text>kg</InputGroup.Text>
+        </InputGroup>
+
       </Col>
-      <hr />
-      <Col className="separador">
+      <Col className="separador dashboard" >
         <Form.Group className="gap-2" controlId="form">
+
           <Row>
-            <Form.Label>Produtos:</Form.Label>
-          </Row>
-          <Row>
-            <Form.Label>Código: </Form.Label>
+            <Form.Label>Produtos </Form.Label>
           </Row>
           <Row>
             <Stack gap={2}>
               <Row className="mb-3">
-                <Form.Group as={Col}>
-                  <Form.Label>Selecione o Código</Form.Label>
+                <FloatingLabel controlId="floatingSelect" label="Selecione o Código ">
                   <Form.Select onChange={selecionado}>
-                    <option value="-1">...</option>
+                    <option value="-1"></option>
                     {produtos.map((p, i) => (
                       <option key={p.id || i} value={i}>
                         {p.codigo}
                       </option>
                     ))}
                   </Form.Select>
-                </Form.Group>
+                </FloatingLabel>
               </Row>
-              <Form.Control
-                type="text"
-                placeholder="Quantidade"
-                value={quantidade}
-                onChange={(e) => setQuantidade(e.target.value)}
-              />
+              <FloatingLabel controlId="floatingSelect" label="Quantidade" className="mb-3">
+                <Form.Control
+                  type="text"
+                  placeholder="Quantidade"
+                  value={quantidade}
+                  onChange={(e) => setQuantidade(e.target.value)}
+                />
+              </FloatingLabel>
               <Button
                 onClick={() => {
                   adicionarProd();
-                  setCodigo("");
                   setQuantidade("");
                 }}
               >
@@ -217,44 +223,37 @@ function Cadastrar(param) {
             </Stack>
           </Row>
         </Form.Group>
+
+        <Row className="mb-3">
+          <Form.Group
+            className="mt-4 justify-content-md-center"
+            controlId="formLista"
+          >
+            <Lista
+              titulos={titulos}
+              campos={campos}
+              valores={lista}
+              resposta="Nenhum produto adicionado"
+              aoClicar={(e) => {
+                removerProd(e);
+              }}
+            />
+          </Form.Group>
+        </Row>
+
       </Col>
 
-      <Row className="mb-3">
-        <Form.Group
-          className="mt-4 justify-content-md-center"
-          controlId="formLista"
-        >
-          <Lista
-            titulos={titulos}
-            campos={campos}
-            valores={lista}
-            resposta="Nenhum produto adicionado"
-            aoClicar={(e) => {
-              removerProd(e);
-            }}
-          />
-        </Form.Group>
-      </Row>
+      <Button
+        onClick={() => {
+          // limpar();
+        }}
+      >
+        Cancelar
+      </Button>
 
       <Button
         onClick={() => {
-          // limpar();
-        }}
-      >
-        <i class="bi bi-trash3"></i> Excluir
-      </Button>
-      <Button
-        onClick={() => {
-          // limpar();
-        }}
-      >
-        Close
-      </Button>
-      <Button
-        onClick={() => {
-          // salvar();
-          // param.buscar();
-          // limpar();
+          salvar();
         }}
       >
         Salvar

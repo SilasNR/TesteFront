@@ -4,7 +4,7 @@
 
 .lista {
   overflow-y: auto;
-  max-height: 650px;
+  max-height: 450px;
   border-radius: 0px 0px 10px 10px;
   border: 1px solid --bs-primary-rgb;
 }
@@ -23,4 +23,9 @@
 
 #dropdown-basic {
   border: 0px;
+}
+
+.lista-body{
+  max-height: 520px ;
+  overflow-y: scroll;
 }
