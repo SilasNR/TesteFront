@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Col,Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { getPedidos, deletePedido } from "../../service/pedido.service.js";
 import Filtro from "../../Componentes/Filto/Filtro.js";
 import Lista from "../../Componentes/Lista/Lista.js";
